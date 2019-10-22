@@ -1,8 +1,9 @@
-const childProcess = require('child_process')
-const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] }
-const { sync: binaryExist } = require('command-exists')
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.install = install;const childProcess = require('child_process');
+const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] };
+const { sync: binaryExist } = require('command-exists');
 
-export function install() {
-  if (binaryExist('git')) console.log('✔ git is installed.')
-  else childProcess.execSync('sudo apt install git', childProcessOption)
+function install() {
+  if (binaryExist('git')) console.log('✔ git is installed.');else
+  childProcess.execSync('sudo apt install git', childProcessOption);
 }
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NvdXJjZS9wYWNrYWdlSW5zdGFsbGF0aW9uL3VuaXhQYWNrYWdlL2luc3RhbGxHaXQuanMiXSwibmFtZXMiOlsiY2hpbGRQcm9jZXNzIiwicmVxdWlyZSIsImNoaWxkUHJvY2Vzc09wdGlvbiIsImN3ZCIsIl9fZGlybmFtZSIsInNoZWxsIiwic3RkaW8iLCJzeW5jIiwiYmluYXJ5RXhpc3QiLCJpbnN0YWxsIiwiY29uc29sZSIsImxvZyIsImV4ZWNTeW5jIl0sIm1hcHBpbmdzIjoicUdBQUEsTUFBTUEsWUFBWSxHQUFHQyxPQUFPLENBQUMsZUFBRCxDQUE1QjtBQUNBLE1BQU1DLGtCQUFrQixHQUFHLEVBQUVDLEdBQUcsRUFBRUMsU0FBUCxFQUFrQkMsS0FBSyxFQUFFLElBQXpCLEVBQStCQyxLQUFLLEVBQUUsQ0FBQyxDQUFELEVBQUksQ0FBSixFQUFPLENBQVAsQ0FBdEMsRUFBM0I7QUFDQSxNQUFNLEVBQUVDLElBQUksRUFBRUMsV0FBUixLQUF3QlAsT0FBTyxDQUFDLGdCQUFELENBQXJDOztBQUVPLFNBQVNRLE9BQVQsR0FBbUI7QUFDeEIsTUFBSUQsV0FBVyxDQUFDLEtBQUQsQ0FBZixFQUF3QkUsT0FBTyxDQUFDQyxHQUFSLENBQVkscUJBQVosRUFBeEI7QUFDS1gsRUFBQUEsWUFBWSxDQUFDWSxRQUFiLENBQXNCLHNCQUF0QixFQUE4Q1Ysa0JBQTlDO0FBQ04iLCJzb3VyY2VzQ29udGVudCI6WyJjb25zdCBjaGlsZFByb2Nlc3MgPSByZXF1aXJlKCdjaGlsZF9wcm9jZXNzJylcclxuY29uc3QgY2hpbGRQcm9jZXNzT3B0aW9uID0geyBjd2Q6IF9fZGlybmFtZSwgc2hlbGw6IHRydWUsIHN0ZGlvOiBbMCwgMSwgMl0gfVxyXG5jb25zdCB7IHN5bmM6IGJpbmFyeUV4aXN0IH0gPSByZXF1aXJlKCdjb21tYW5kLWV4aXN0cycpXHJcblxyXG5leHBvcnQgZnVuY3Rpb24gaW5zdGFsbCgpIHtcclxuICBpZiAoYmluYXJ5RXhpc3QoJ2dpdCcpKSBjb25zb2xlLmxvZygn4pyUIGdpdCBpcyBpbnN0YWxsZWQuJylcclxuICBlbHNlIGNoaWxkUHJvY2Vzcy5leGVjU3luYygnc3VkbyBhcHQgaW5zdGFsbCBnaXQnLCBjaGlsZFByb2Nlc3NPcHRpb24pXHJcbn1cclxuIl19

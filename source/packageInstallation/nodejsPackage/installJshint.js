@@ -1,9 +1,10 @@
-const childProcess = require('child_process')
-const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] }
-const { sync: binaryExist } = require('command-exists')
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.install = install;const childProcess = require('child_process');
+const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] };
+const { sync: binaryExist } = require('command-exists');
 
-// Installed globally for usage with VSCode extension
-export function install() {
-  if (binaryExist('jshint')) console.log('✔ jshint (npm package) is installed.')
-  else childProcess.execSync('yarn install -g jshint', childProcessOption)
+
+function install() {
+  if (binaryExist('jshint')) console.log('✔ jshint (npm package) is installed.');else
+  childProcess.execSync('yarn install -g jshint', childProcessOption);
 }
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NvdXJjZS9wYWNrYWdlSW5zdGFsbGF0aW9uL25vZGVqc1BhY2thZ2UvaW5zdGFsbEpzaGludC5qcyJdLCJuYW1lcyI6WyJjaGlsZFByb2Nlc3MiLCJyZXF1aXJlIiwiY2hpbGRQcm9jZXNzT3B0aW9uIiwiY3dkIiwiX19kaXJuYW1lIiwic2hlbGwiLCJzdGRpbyIsInN5bmMiLCJiaW5hcnlFeGlzdCIsImluc3RhbGwiLCJjb25zb2xlIiwibG9nIiwiZXhlY1N5bmMiXSwibWFwcGluZ3MiOiJxR0FBQSxNQUFNQSxZQUFZLEdBQUdDLE9BQU8sQ0FBQyxlQUFELENBQTVCO0FBQ0EsTUFBTUMsa0JBQWtCLEdBQUcsRUFBRUMsR0FBRyxFQUFFQyxTQUFQLEVBQWtCQyxLQUFLLEVBQUUsSUFBekIsRUFBK0JDLEtBQUssRUFBRSxDQUFDLENBQUQsRUFBSSxDQUFKLEVBQU8sQ0FBUCxDQUF0QyxFQUEzQjtBQUNBLE1BQU0sRUFBRUMsSUFBSSxFQUFFQyxXQUFSLEtBQXdCUCxPQUFPLENBQUMsZ0JBQUQsQ0FBckM7OztBQUdPLFNBQVNRLE9BQVQsR0FBbUI7QUFDeEIsTUFBSUQsV0FBVyxDQUFDLFFBQUQsQ0FBZixFQUEyQkUsT0FBTyxDQUFDQyxHQUFSLENBQVksc0NBQVosRUFBM0I7QUFDS1gsRUFBQUEsWUFBWSxDQUFDWSxRQUFiLENBQXNCLHdCQUF0QixFQUFnRFYsa0JBQWhEO0FBQ04iLCJzb3VyY2VzQ29udGVudCI6WyJjb25zdCBjaGlsZFByb2Nlc3MgPSByZXF1aXJlKCdjaGlsZF9wcm9jZXNzJylcclxuY29uc3QgY2hpbGRQcm9jZXNzT3B0aW9uID0geyBjd2Q6IF9fZGlybmFtZSwgc2hlbGw6IHRydWUsIHN0ZGlvOiBbMCwgMSwgMl0gfVxyXG5jb25zdCB7IHN5bmM6IGJpbmFyeUV4aXN0IH0gPSByZXF1aXJlKCdjb21tYW5kLWV4aXN0cycpXHJcblxyXG4vLyBJbnN0YWxsZWQgZ2xvYmFsbHkgZm9yIHVzYWdlIHdpdGggVlNDb2RlIGV4dGVuc2lvblxyXG5leHBvcnQgZnVuY3Rpb24gaW5zdGFsbCgpIHtcclxuICBpZiAoYmluYXJ5RXhpc3QoJ2pzaGludCcpKSBjb25zb2xlLmxvZygn4pyUIGpzaGludCAobnBtIHBhY2thZ2UpIGlzIGluc3RhbGxlZC4nKVxyXG4gIGVsc2UgY2hpbGRQcm9jZXNzLmV4ZWNTeW5jKCd5YXJuIGluc3RhbGwgLWcganNoaW50JywgY2hpbGRQcm9jZXNzT3B0aW9uKVxyXG59XHJcbiJdfQ==

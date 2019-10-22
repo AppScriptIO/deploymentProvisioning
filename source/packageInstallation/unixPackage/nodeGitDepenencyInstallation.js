@@ -1,41 +1,41 @@
-const childProcess = require('child_process')
-const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] }
+"use strict";const childProcess = require('child_process');
+const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] };
 
-/* 
-NodeGit npm packge - Required preinstall packages: 
-    - https://packages.debian.org/source/sid/libgit2 https://github.com/libgit2/libgit2
-    libgit2 unix package is a dependency for nodegit npm package.
-    (do not use development version `libgit2-dev`, use the stable one instead.)
-    - Optional dependencies: https://salsa.debian.org/debian/libgit2#optional-dependencies
-        - https://packages.debian.org/source/jessie/openssl
-Note: that the package versin may not support the latest nodejs version, e.g. nodegit@next supports Nodejs 12 while the former versions throw errors during installation.
-Note: the package exists for latest debian/ubuntu releases. Some releases support only older versions.
 
-# If errors occur try installing the following packages:
-https://stackoverflow.com/questions/37634883/installing-libgit2-and-pygit2-on-debian-docker
-```
-    DEBIAN_FRONTEND=noninteractive sudo apt-get update -qq && DEBIAN_FRONTEND=noninteractive sudo apt-get install -yqq openssl libssl-dev libgit2-27 libssh2-1-dev  libffi-dev  zlib1g-dev python-cffi python-dev  python-pip build-essential cmake  gcc  pkg-config  git libhttp-parser-dev python-setuptools wget
-```
-*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = {
   install: function install() {
-    let libgit2PackageVersion = `libgit2-27` // Importatnt! When upgrade the version make sure the nodejs packge `nodegit` which depends on `libgit2` supports the version.
-    // for Ubuntu 19+ or Debian 10+ (i.e. package `libgit2-27` must exist)
-    let packagesInstalled = childProcess
-      .execSync(`list="$(dpkg -l)" && echo $list`, { cwd: __dirname, encoding: 'utf8' } /** to allow catching returned result */)
-      .replace(/\n$/, '')
-      .trim() // remove new line and white space to prevent comparison issues
+    let libgit2PackageVersion = `libgit2-27`;
 
-    // try `dpkg -l | grep libgit2` to check version
-    if (packagesInstalled.includes('libgit2')) console.log(`nodegit's dependency 'libgit2' is installed.`)
-    else
-      childProcess.execSync(
-        [
-          `echo 'Machine global peer dependency "nodegit" is required. Checking for libgit2...\n'`,
-          // `-qq` = No output except for errors
-          `DEBIAN_FRONTEND=noninteractive sudo apt-get install -yqq ${libgit2PackageVersion} openssl`,
-        ].join(' && \\\n'),
-        childProcessOption,
-      )
-  },
-}
+    let packagesInstalled = childProcess.
+    execSync(`list="$(dpkg -l)" && echo $list`, { cwd: __dirname, encoding: 'utf8' }).
+    replace(/\n$/, '').
+    trim();
+
+
+    if (packagesInstalled.includes('libgit2')) console.log(`nodegit's dependency 'libgit2' is installed.`);else
+
+    childProcess.execSync(
+    [
+    `echo 'Machine global peer dependency "nodegit" is required. Checking for libgit2...\n'`,
+
+    `DEBIAN_FRONTEND=noninteractive sudo apt-get install -yqq ${libgit2PackageVersion} openssl`].
+    join(' && \\\n'),
+    childProcessOption);
+
+  } };
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NvdXJjZS9wYWNrYWdlSW5zdGFsbGF0aW9uL3VuaXhQYWNrYWdlL25vZGVHaXREZXBlbmVuY3lJbnN0YWxsYXRpb24uanMiXSwibmFtZXMiOlsiY2hpbGRQcm9jZXNzIiwicmVxdWlyZSIsImNoaWxkUHJvY2Vzc09wdGlvbiIsImN3ZCIsIl9fZGlybmFtZSIsInNoZWxsIiwic3RkaW8iLCJtb2R1bGUiLCJleHBvcnRzIiwiaW5zdGFsbCIsImxpYmdpdDJQYWNrYWdlVmVyc2lvbiIsInBhY2thZ2VzSW5zdGFsbGVkIiwiZXhlY1N5bmMiLCJlbmNvZGluZyIsInJlcGxhY2UiLCJ0cmltIiwiaW5jbHVkZXMiLCJjb25zb2xlIiwibG9nIiwiam9pbiJdLCJtYXBwaW5ncyI6ImFBQUEsTUFBTUEsWUFBWSxHQUFHQyxPQUFPLENBQUMsZUFBRCxDQUE1QjtBQUNBLE1BQU1DLGtCQUFrQixHQUFHLEVBQUVDLEdBQUcsRUFBRUMsU0FBUCxFQUFrQkMsS0FBSyxFQUFFLElBQXpCLEVBQStCQyxLQUFLLEVBQUUsQ0FBQyxDQUFELEVBQUksQ0FBSixFQUFPLENBQVAsQ0FBdEMsRUFBM0I7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQWtCQUMsTUFBTSxDQUFDQyxPQUFQLEdBQWlCO0FBQ2ZDLEVBQUFBLE9BQU8sRUFBRSxTQUFTQSxPQUFULEdBQW1CO0FBQzFCLFFBQUlDLHFCQUFxQixHQUFJLFlBQTdCOztBQUVBLFFBQUlDLGlCQUFpQixHQUFHWCxZQUFZO0FBQ2pDWSxJQUFBQSxRQURxQixDQUNYLGlDQURXLEVBQ3VCLEVBQUVULEdBQUcsRUFBRUMsU0FBUCxFQUFrQlMsUUFBUSxFQUFFLE1BQTVCLEVBRHZCO0FBRXJCQyxJQUFBQSxPQUZxQixDQUViLEtBRmEsRUFFTixFQUZNO0FBR3JCQyxJQUFBQSxJQUhxQixFQUF4Qjs7O0FBTUEsUUFBSUosaUJBQWlCLENBQUNLLFFBQWxCLENBQTJCLFNBQTNCLENBQUosRUFBMkNDLE9BQU8sQ0FBQ0MsR0FBUixDQUFhLDhDQUFiLEVBQTNDOztBQUVFbEIsSUFBQUEsWUFBWSxDQUFDWSxRQUFiO0FBQ0U7QUFDRyw0RkFESDs7QUFHRyxnRUFBMkRGLHFCQUFzQixVQUhwRjtBQUlFUyxJQUFBQSxJQUpGLENBSU8sVUFKUCxDQURGO0FBTUVqQixJQUFBQSxrQkFORjs7QUFRSCxHQXBCYyxFQUFqQiIsInNvdXJjZXNDb250ZW50IjpbImNvbnN0IGNoaWxkUHJvY2VzcyA9IHJlcXVpcmUoJ2NoaWxkX3Byb2Nlc3MnKVxuY29uc3QgY2hpbGRQcm9jZXNzT3B0aW9uID0geyBjd2Q6IF9fZGlybmFtZSwgc2hlbGw6IHRydWUsIHN0ZGlvOiBbMCwgMSwgMl0gfVxuXG4vKiBcbk5vZGVHaXQgbnBtIHBhY2tnZSAtIFJlcXVpcmVkIHByZWluc3RhbGwgcGFja2FnZXM6IFxuICAgIC0gaHR0cHM6Ly9wYWNrYWdlcy5kZWJpYW4ub3JnL3NvdXJjZS9zaWQvbGliZ2l0MiBodHRwczovL2dpdGh1Yi5jb20vbGliZ2l0Mi9saWJnaXQyXG4gICAgbGliZ2l0MiB1bml4IHBhY2thZ2UgaXMgYSBkZXBlbmRlbmN5IGZvciBub2RlZ2l0IG5wbSBwYWNrYWdlLlxuICAgIChkbyBub3QgdXNlIGRldmVsb3BtZW50IHZlcnNpb24gYGxpYmdpdDItZGV2YCwgdXNlIHRoZSBzdGFibGUgb25lIGluc3RlYWQuKVxuICAgIC0gT3B0aW9uYWwgZGVwZW5kZW5jaWVzOiBodHRwczovL3NhbHNhLmRlYmlhbi5vcmcvZGViaWFuL2xpYmdpdDIjb3B0aW9uYWwtZGVwZW5kZW5jaWVzXG4gICAgICAgIC0gaHR0cHM6Ly9wYWNrYWdlcy5kZWJpYW4ub3JnL3NvdXJjZS9qZXNzaWUvb3BlbnNzbFxuTm90ZTogdGhhdCB0aGUgcGFja2FnZSB2ZXJzaW4gbWF5IG5vdCBzdXBwb3J0IHRoZSBsYXRlc3Qgbm9kZWpzIHZlcnNpb24sIGUuZy4gbm9kZWdpdEBuZXh0IHN1cHBvcnRzIE5vZGVqcyAxMiB3aGlsZSB0aGUgZm9ybWVyIHZlcnNpb25zIHRocm93IGVycm9ycyBkdXJpbmcgaW5zdGFsbGF0aW9uLlxuTm90ZTogdGhlIHBhY2thZ2UgZXhpc3RzIGZvciBsYXRlc3QgZGViaWFuL3VidW50dSByZWxlYXNlcy4gU29tZSByZWxlYXNlcyBzdXBwb3J0IG9ubHkgb2xkZXIgdmVyc2lvbnMuXG5cbiMgSWYgZXJyb3JzIG9jY3VyIHRyeSBpbnN0YWxsaW5nIHRoZSBmb2xsb3dpbmcgcGFja2FnZXM6XG5odHRwczovL3N0YWNrb3ZlcmZsb3cuY29tL3F1ZXN0aW9ucy8zNzYzNDg4My9pbnN0YWxsaW5nLWxpYmdpdDItYW5kLXB5Z2l0Mi1vbi1kZWJpYW4tZG9ja2VyXG5gYGBcbiAgICBERUJJQU5fRlJPTlRFTkQ9bm9uaW50ZXJhY3RpdmUgc3VkbyBhcHQtZ2V0IHVwZGF0ZSAtcXEgJiYgREVCSUFOX0ZST05URU5EPW5vbmludGVyYWN0aXZlIHN1ZG8gYXB0LWdldCBpbnN0YWxsIC15cXEgb3BlbnNzbCBsaWJzc2wtZGV2IGxpYmdpdDItMjcgbGlic3NoMi0xLWRldiAgbGliZmZpLWRldiAgemxpYjFnLWRldiBweXRob24tY2ZmaSBweXRob24tZGV2ICBweXRob24tcGlwIGJ1aWxkLWVzc2VudGlhbCBjbWFrZSAgZ2NjICBwa2ctY29uZmlnICBnaXQgbGliaHR0cC1wYXJzZXItZGV2IHB5dGhvbi1zZXR1cHRvb2xzIHdnZXRcbmBgYFxuKi9cbm1vZHVsZS5leHBvcnRzID0ge1xuICBpbnN0YWxsOiBmdW5jdGlvbiBpbnN0YWxsKCkge1xuICAgIGxldCBsaWJnaXQyUGFja2FnZVZlcnNpb24gPSBgbGliZ2l0Mi0yN2AgLy8gSW1wb3J0YXRudCEgV2hlbiB1cGdyYWRlIHRoZSB2ZXJzaW9uIG1ha2Ugc3VyZSB0aGUgbm9kZWpzIHBhY2tnZSBgbm9kZWdpdGAgd2hpY2ggZGVwZW5kcyBvbiBgbGliZ2l0MmAgc3VwcG9ydHMgdGhlIHZlcnNpb24uXG4gICAgLy8gZm9yIFVidW50dSAxOSsgb3IgRGViaWFuIDEwKyAoaS5lLiBwYWNrYWdlIGBsaWJnaXQyLTI3YCBtdXN0IGV4aXN0KVxuICAgIGxldCBwYWNrYWdlc0luc3RhbGxlZCA9IGNoaWxkUHJvY2Vzc1xuICAgICAgLmV4ZWNTeW5jKGBsaXN0PVwiJChkcGtnIC1sKVwiICYmIGVjaG8gJGxpc3RgLCB7IGN3ZDogX19kaXJuYW1lLCBlbmNvZGluZzogJ3V0ZjgnIH0gLyoqIHRvIGFsbG93IGNhdGNoaW5nIHJldHVybmVkIHJlc3VsdCAqLylcbiAgICAgIC5yZXBsYWNlKC9cXG4kLywgJycpXG4gICAgICAudHJpbSgpIC8vIHJlbW92ZSBuZXcgbGluZSBhbmQgd2hpdGUgc3BhY2UgdG8gcHJldmVudCBjb21wYXJpc29uIGlzc3Vlc1xuXG4gICAgLy8gdHJ5IGBkcGtnIC1sIHwgZ3JlcCBsaWJnaXQyYCB0byBjaGVjayB2ZXJzaW9uXG4gICAgaWYgKHBhY2thZ2VzSW5zdGFsbGVkLmluY2x1ZGVzKCdsaWJnaXQyJykpIGNvbnNvbGUubG9nKGBub2RlZ2l0J3MgZGVwZW5kZW5jeSAnbGliZ2l0MicgaXMgaW5zdGFsbGVkLmApXG4gICAgZWxzZVxuICAgICAgY2hpbGRQcm9jZXNzLmV4ZWNTeW5jKFxuICAgICAgICBbXG4gICAgICAgICAgYGVjaG8gJ01hY2hpbmUgZ2xvYmFsIHBlZXIgZGVwZW5kZW5jeSBcIm5vZGVnaXRcIiBpcyByZXF1aXJlZC4gQ2hlY2tpbmcgZm9yIGxpYmdpdDIuLi5cXG4nYCxcbiAgICAgICAgICAvLyBgLXFxYCA9IE5vIG91dHB1dCBleGNlcHQgZm9yIGVycm9yc1xuICAgICAgICAgIGBERUJJQU5fRlJPTlRFTkQ9bm9uaW50ZXJhY3RpdmUgc3VkbyBhcHQtZ2V0IGluc3RhbGwgLXlxcSAke2xpYmdpdDJQYWNrYWdlVmVyc2lvbn0gb3BlbnNzbGAsXG4gICAgICAgIF0uam9pbignICYmIFxcXFxcXG4nKSxcbiAgICAgICAgY2hpbGRQcm9jZXNzT3B0aW9uLFxuICAgICAgKVxuICB9LFxufVxuIl19
