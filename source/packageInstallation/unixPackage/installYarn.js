@@ -1,53 +1,51 @@
-const childProcess = require('child_process')
-const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] }
-const { sync: binaryExist } = require('command-exists')
-const isWsl = require('is-wsl')
-const { sync: getBinaryPath } = require('which')
-const filesystem = require('fs')
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.install = install;const childProcess = require('child_process');
+const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] };
+const { sync: binaryExist } = require('command-exists');
+const isWsl = require('is-wsl');
+const { sync: getBinaryPath } = require('which');
+const filesystem = require('fs');
 
-export function install() {
-  let isCommandInstalled
-  /* Check installation presence: The check for a command in linux doesn't diffrentiate from a command installed in WSL and command installed in Windows. As WSL shares Windows paths, where:
-    The Windows Yarn command can be accessed from WSL which makes the check positive, even though no installation is present in the WSL side. Therefore a secondary check should be executed to verify that the binary isn't installed in WSL itself, regardless of wether it exists in Windows side.
-  */
-  // check environment - if WSL on Windows
+function install() {
+  let isCommandInstalled;
+
+
+
+
 
   if (binaryExist('yarn') && isWsl) {
-    // compare binary command path to Windows system, checking if the installation is on the Windows or WSL side.
-    let binaryPath = getBinaryPath('yarn')
-    let windowsSystemPath = childProcess
-      .execSync(
-        `windowsSystemPath="$( powershell.exe -NoProfile -NonInteractive -Command ' $drive=(Get-WmiObject Win32_OperatingSystem).SystemDrive; echo (-join($drive, "\\")) ' )" && echo $windowsSystemPath`,
-        { cwd: __dirname, encoding: 'utf8' }, // to allow catching returned result
-      )
-      .replace(/\n$/, '')
-      .trim() // remove new line and white space to prevent comparison issues
-    let windowsSystemPathInWSL = childProcess
-      .execSync(
-        `windowsSystemPathInWSL="$( wslpath -u '${windowsSystemPath}')" && echo $windowsSystemPathInWSL`,
-        { cwd: __dirname, encoding: 'utf8' }, // to allow catching returned result
-      )
-      .replace(/\n$/, '')
-      .trim() // remove new line and white space to prevent comparison issues
 
-    // Important note: In cases (e.g. calling script in subprocess or from powershell wsl.exe command) the binary path points to a temporary binary file that redirects to the windows location.
+    let binaryPath = getBinaryPath('yarn');
+    let windowsSystemPath = childProcess.
+    execSync(
+    `windowsSystemPath="$( powershell.exe -NoProfile -NonInteractive -Command ' $drive=(Get-WmiObject Win32_OperatingSystem).SystemDrive; echo (-join($drive, "\\")) ' )" && echo $windowsSystemPath`,
+    { cwd: __dirname, encoding: 'utf8' }).
+
+    replace(/\n$/, '').
+    trim();
+    let windowsSystemPathInWSL = childProcess.
+    execSync(
+    `windowsSystemPathInWSL="$( wslpath -u '${windowsSystemPath}')" && echo $windowsSystemPathInWSL`,
+    { cwd: __dirname, encoding: 'utf8' }).
+
+    replace(/\n$/, '').
+    trim();
+
+
     let isWindowsInstallation =
-      binaryPath.includes(windowsSystemPathInWSL) || (filesystem.existsSync(binaryPath) && filesystem.readFileSync(binaryPath, { encoding: 'utf8' }).includes(windowsSystemPathInWSL))
-    // if command is installed in WSL side:
-    isCommandInstalled = !isWindowsInstallation
-  } else isCommandInstalled = binaryExist('yarn')
+    binaryPath.includes(windowsSystemPathInWSL) || filesystem.existsSync(binaryPath) && filesystem.readFileSync(binaryPath, { encoding: 'utf8' }).includes(windowsSystemPathInWSL);
 
-  if (isCommandInstalled) console.log('✔ yarn is installed.')
-  else
-    childProcess.execSync(
-      [
-        'curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -',
-        'echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list',
-        'sudo apt-get -y update && sudo apt-get install -y yarn',
-      ].join(' && \\\n'),
-      childProcessOption,
-    )
+    isCommandInstalled = !isWindowsInstallation;
+  } else isCommandInstalled = binaryExist('yarn');
+
+  if (isCommandInstalled) console.log('✔ yarn is installed.');else
+
+  childProcess.execSync(
+  [
+  'curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -',
+  'echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list',
+  'sudo apt-get -y update && sudo apt-get install -y yarn'].
+  join(' && \\\n'),
+  childProcessOption);
+
 }
-
-// Upgrade yarn -
-// `curl -o- -L https://yarnpkg.com/install.sh | bash`
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NvdXJjZS9wYWNrYWdlSW5zdGFsbGF0aW9uL3VuaXhQYWNrYWdlL2luc3RhbGxZYXJuLmpzIl0sIm5hbWVzIjpbImNoaWxkUHJvY2VzcyIsInJlcXVpcmUiLCJjaGlsZFByb2Nlc3NPcHRpb24iLCJjd2QiLCJfX2Rpcm5hbWUiLCJzaGVsbCIsInN0ZGlvIiwic3luYyIsImJpbmFyeUV4aXN0IiwiaXNXc2wiLCJnZXRCaW5hcnlQYXRoIiwiZmlsZXN5c3RlbSIsImluc3RhbGwiLCJpc0NvbW1hbmRJbnN0YWxsZWQiLCJiaW5hcnlQYXRoIiwid2luZG93c1N5c3RlbVBhdGgiLCJleGVjU3luYyIsImVuY29kaW5nIiwicmVwbGFjZSIsInRyaW0iLCJ3aW5kb3dzU3lzdGVtUGF0aEluV1NMIiwiaXNXaW5kb3dzSW5zdGFsbGF0aW9uIiwiaW5jbHVkZXMiLCJleGlzdHNTeW5jIiwicmVhZEZpbGVTeW5jIiwiY29uc29sZSIsImxvZyIsImpvaW4iXSwibWFwcGluZ3MiOiJxR0FBQSxNQUFNQSxZQUFZLEdBQUdDLE9BQU8sQ0FBQyxlQUFELENBQTVCO0FBQ0EsTUFBTUMsa0JBQWtCLEdBQUcsRUFBRUMsR0FBRyxFQUFFQyxTQUFQLEVBQWtCQyxLQUFLLEVBQUUsSUFBekIsRUFBK0JDLEtBQUssRUFBRSxDQUFDLENBQUQsRUFBSSxDQUFKLEVBQU8sQ0FBUCxDQUF0QyxFQUEzQjtBQUNBLE1BQU0sRUFBRUMsSUFBSSxFQUFFQyxXQUFSLEtBQXdCUCxPQUFPLENBQUMsZ0JBQUQsQ0FBckM7QUFDQSxNQUFNUSxLQUFLLEdBQUdSLE9BQU8sQ0FBQyxRQUFELENBQXJCO0FBQ0EsTUFBTSxFQUFFTSxJQUFJLEVBQUVHLGFBQVIsS0FBMEJULE9BQU8sQ0FBQyxPQUFELENBQXZDO0FBQ0EsTUFBTVUsVUFBVSxHQUFHVixPQUFPLENBQUMsSUFBRCxDQUExQjs7QUFFTyxTQUFTVyxPQUFULEdBQW1CO0FBQ3hCLE1BQUlDLGtCQUFKOzs7Ozs7QUFNQSxNQUFJTCxXQUFXLENBQUMsTUFBRCxDQUFYLElBQXVCQyxLQUEzQixFQUFrQzs7QUFFaEMsUUFBSUssVUFBVSxHQUFHSixhQUFhLENBQUMsTUFBRCxDQUE5QjtBQUNBLFFBQUlLLGlCQUFpQixHQUFHZixZQUFZO0FBQ2pDZ0IsSUFBQUEsUUFEcUI7QUFFbkIscU1BRm1CO0FBR3BCLE1BQUViLEdBQUcsRUFBRUMsU0FBUCxFQUFrQmEsUUFBUSxFQUFFLE1BQTVCLEVBSG9COztBQUtyQkMsSUFBQUEsT0FMcUIsQ0FLYixLQUxhLEVBS04sRUFMTTtBQU1yQkMsSUFBQUEsSUFOcUIsRUFBeEI7QUFPQSxRQUFJQyxzQkFBc0IsR0FBR3BCLFlBQVk7QUFDdENnQixJQUFBQSxRQUQwQjtBQUV4Qiw4Q0FBeUNELGlCQUFrQixxQ0FGbkM7QUFHekIsTUFBRVosR0FBRyxFQUFFQyxTQUFQLEVBQWtCYSxRQUFRLEVBQUUsTUFBNUIsRUFIeUI7O0FBSzFCQyxJQUFBQSxPQUwwQixDQUtsQixLQUxrQixFQUtYLEVBTFc7QUFNMUJDLElBQUFBLElBTjBCLEVBQTdCOzs7QUFTQSxRQUFJRSxxQkFBcUI7QUFDdkJQLElBQUFBLFVBQVUsQ0FBQ1EsUUFBWCxDQUFvQkYsc0JBQXBCLEtBQWdEVCxVQUFVLENBQUNZLFVBQVgsQ0FBc0JULFVBQXRCLEtBQXFDSCxVQUFVLENBQUNhLFlBQVgsQ0FBd0JWLFVBQXhCLEVBQW9DLEVBQUVHLFFBQVEsRUFBRSxNQUFaLEVBQXBDLEVBQTBESyxRQUExRCxDQUFtRUYsc0JBQW5FLENBRHZGOztBQUdBUCxJQUFBQSxrQkFBa0IsR0FBRyxDQUFDUSxxQkFBdEI7QUFDRCxHQXZCRCxNQXVCT1Isa0JBQWtCLEdBQUdMLFdBQVcsQ0FBQyxNQUFELENBQWhDOztBQUVQLE1BQUlLLGtCQUFKLEVBQXdCWSxPQUFPLENBQUNDLEdBQVIsQ0FBWSxzQkFBWixFQUF4Qjs7QUFFRTFCLEVBQUFBLFlBQVksQ0FBQ2dCLFFBQWI7QUFDRTtBQUNFLDBFQURGO0FBRUUsc0dBRkY7QUFHRSwwREFIRjtBQUlFVyxFQUFBQSxJQUpGLENBSU8sVUFKUCxDQURGO0FBTUV6QixFQUFBQSxrQkFORjs7QUFRSCIsInNvdXJjZXNDb250ZW50IjpbImNvbnN0IGNoaWxkUHJvY2VzcyA9IHJlcXVpcmUoJ2NoaWxkX3Byb2Nlc3MnKVxyXG5jb25zdCBjaGlsZFByb2Nlc3NPcHRpb24gPSB7IGN3ZDogX19kaXJuYW1lLCBzaGVsbDogdHJ1ZSwgc3RkaW86IFswLCAxLCAyXSB9XHJcbmNvbnN0IHsgc3luYzogYmluYXJ5RXhpc3QgfSA9IHJlcXVpcmUoJ2NvbW1hbmQtZXhpc3RzJylcclxuY29uc3QgaXNXc2wgPSByZXF1aXJlKCdpcy13c2wnKVxyXG5jb25zdCB7IHN5bmM6IGdldEJpbmFyeVBhdGggfSA9IHJlcXVpcmUoJ3doaWNoJylcclxuY29uc3QgZmlsZXN5c3RlbSA9IHJlcXVpcmUoJ2ZzJylcclxuXHJcbmV4cG9ydCBmdW5jdGlvbiBpbnN0YWxsKCkge1xyXG4gIGxldCBpc0NvbW1hbmRJbnN0YWxsZWRcclxuICAvKiBDaGVjayBpbnN0YWxsYXRpb24gcHJlc2VuY2U6IFRoZSBjaGVjayBmb3IgYSBjb21tYW5kIGluIGxpbnV4IGRvZXNuJ3QgZGlmZnJlbnRpYXRlIGZyb20gYSBjb21tYW5kIGluc3RhbGxlZCBpbiBXU0wgYW5kIGNvbW1hbmQgaW5zdGFsbGVkIGluIFdpbmRvd3MuIEFzIFdTTCBzaGFyZXMgV2luZG93cyBwYXRocywgd2hlcmU6XHJcbiAgICBUaGUgV2luZG93cyBZYXJuIGNvbW1hbmQgY2FuIGJlIGFjY2Vzc2VkIGZyb20gV1NMIHdoaWNoIG1ha2VzIHRoZSBjaGVjayBwb3NpdGl2ZSwgZXZlbiB0aG91Z2ggbm8gaW5zdGFsbGF0aW9uIGlzIHByZXNlbnQgaW4gdGhlIFdTTCBzaWRlLiBUaGVyZWZvcmUgYSBzZWNvbmRhcnkgY2hlY2sgc2hvdWxkIGJlIGV4ZWN1dGVkIHRvIHZlcmlmeSB0aGF0IHRoZSBiaW5hcnkgaXNuJ3QgaW5zdGFsbGVkIGluIFdTTCBpdHNlbGYsIHJlZ2FyZGxlc3Mgb2Ygd2V0aGVyIGl0IGV4aXN0cyBpbiBXaW5kb3dzIHNpZGUuXHJcbiAgKi9cclxuICAvLyBjaGVjayBlbnZpcm9ubWVudCAtIGlmIFdTTCBvbiBXaW5kb3dzXHJcblxyXG4gIGlmIChiaW5hcnlFeGlzdCgneWFybicpICYmIGlzV3NsKSB7XHJcbiAgICAvLyBjb21wYXJlIGJpbmFyeSBjb21tYW5kIHBhdGggdG8gV2luZG93cyBzeXN0ZW0sIGNoZWNraW5nIGlmIHRoZSBpbnN0YWxsYXRpb24gaXMgb24gdGhlIFdpbmRvd3Mgb3IgV1NMIHNpZGUuXHJcbiAgICBsZXQgYmluYXJ5UGF0aCA9IGdldEJpbmFyeVBhdGgoJ3lhcm4nKVxyXG4gICAgbGV0IHdpbmRvd3NTeXN0ZW1QYXRoID0gY2hpbGRQcm9jZXNzXHJcbiAgICAgIC5leGVjU3luYyhcclxuICAgICAgICBgd2luZG93c1N5c3RlbVBhdGg9XCIkKCBwb3dlcnNoZWxsLmV4ZSAtTm9Qcm9maWxlIC1Ob25JbnRlcmFjdGl2ZSAtQ29tbWFuZCAnICRkcml2ZT0oR2V0LVdtaU9iamVjdCBXaW4zMl9PcGVyYXRpbmdTeXN0ZW0pLlN5c3RlbURyaXZlOyBlY2hvICgtam9pbigkZHJpdmUsIFwiXFxcXFwiKSkgJyApXCIgJiYgZWNobyAkd2luZG93c1N5c3RlbVBhdGhgLFxyXG4gICAgICAgIHsgY3dkOiBfX2Rpcm5hbWUsIGVuY29kaW5nOiAndXRmOCcgfSwgLy8gdG8gYWxsb3cgY2F0Y2hpbmcgcmV0dXJuZWQgcmVzdWx0XHJcbiAgICAgIClcclxuICAgICAgLnJlcGxhY2UoL1xcbiQvLCAnJylcclxuICAgICAgLnRyaW0oKSAvLyByZW1vdmUgbmV3IGxpbmUgYW5kIHdoaXRlIHNwYWNlIHRvIHByZXZlbnQgY29tcGFyaXNvbiBpc3N1ZXNcclxuICAgIGxldCB3aW5kb3dzU3lzdGVtUGF0aEluV1NMID0gY2hpbGRQcm9jZXNzXHJcbiAgICAgIC5leGVjU3luYyhcclxuICAgICAgICBgd2luZG93c1N5c3RlbVBhdGhJbldTTD1cIiQoIHdzbHBhdGggLXUgJyR7d2luZG93c1N5c3RlbVBhdGh9JylcIiAmJiBlY2hvICR3aW5kb3dzU3lzdGVtUGF0aEluV1NMYCxcclxuICAgICAgICB7IGN3ZDogX19kaXJuYW1lLCBlbmNvZGluZzogJ3V0ZjgnIH0sIC8vIHRvIGFsbG93IGNhdGNoaW5nIHJldHVybmVkIHJlc3VsdFxyXG4gICAgICApXHJcbiAgICAgIC5yZXBsYWNlKC9cXG4kLywgJycpXHJcbiAgICAgIC50cmltKCkgLy8gcmVtb3ZlIG5ldyBsaW5lIGFuZCB3aGl0ZSBzcGFjZSB0byBwcmV2ZW50IGNvbXBhcmlzb24gaXNzdWVzXHJcblxyXG4gICAgLy8gSW1wb3J0YW50IG5vdGU6IEluIGNhc2VzIChlLmcuIGNhbGxpbmcgc2NyaXB0IGluIHN1YnByb2Nlc3Mgb3IgZnJvbSBwb3dlcnNoZWxsIHdzbC5leGUgY29tbWFuZCkgdGhlIGJpbmFyeSBwYXRoIHBvaW50cyB0byBhIHRlbXBvcmFyeSBiaW5hcnkgZmlsZSB0aGF0IHJlZGlyZWN0cyB0byB0aGUgd2luZG93cyBsb2NhdGlvbi5cclxuICAgIGxldCBpc1dpbmRvd3NJbnN0YWxsYXRpb24gPVxyXG4gICAgICBiaW5hcnlQYXRoLmluY2x1ZGVzKHdpbmRvd3NTeXN0ZW1QYXRoSW5XU0wpIHx8IChmaWxlc3lzdGVtLmV4aXN0c1N5bmMoYmluYXJ5UGF0aCkgJiYgZmlsZXN5c3RlbS5yZWFkRmlsZVN5bmMoYmluYXJ5UGF0aCwgeyBlbmNvZGluZzogJ3V0ZjgnIH0pLmluY2x1ZGVzKHdpbmRvd3NTeXN0ZW1QYXRoSW5XU0wpKVxyXG4gICAgLy8gaWYgY29tbWFuZCBpcyBpbnN0YWxsZWQgaW4gV1NMIHNpZGU6XHJcbiAgICBpc0NvbW1hbmRJbnN0YWxsZWQgPSAhaXNXaW5kb3dzSW5zdGFsbGF0aW9uXHJcbiAgfSBlbHNlIGlzQ29tbWFuZEluc3RhbGxlZCA9IGJpbmFyeUV4aXN0KCd5YXJuJylcclxuXHJcbiAgaWYgKGlzQ29tbWFuZEluc3RhbGxlZCkgY29uc29sZS5sb2coJ+KclCB5YXJuIGlzIGluc3RhbGxlZC4nKVxyXG4gIGVsc2VcclxuICAgIGNoaWxkUHJvY2Vzcy5leGVjU3luYyhcclxuICAgICAgW1xyXG4gICAgICAgICdjdXJsIC1zUyBodHRwczovL2RsLnlhcm5wa2cuY29tL2RlYmlhbi9wdWJrZXkuZ3BnIHwgc3VkbyBhcHQta2V5IGFkZCAtJyxcclxuICAgICAgICAnZWNobyBcImRlYiBodHRwczovL2RsLnlhcm5wa2cuY29tL2RlYmlhbi8gc3RhYmxlIG1haW5cIiB8IHN1ZG8gdGVlIC9ldGMvYXB0L3NvdXJjZXMubGlzdC5kL3lhcm4ubGlzdCcsXHJcbiAgICAgICAgJ3N1ZG8gYXB0LWdldCAteSB1cGRhdGUgJiYgc3VkbyBhcHQtZ2V0IGluc3RhbGwgLXkgeWFybicsXHJcbiAgICAgIF0uam9pbignICYmIFxcXFxcXG4nKSxcclxuICAgICAgY2hpbGRQcm9jZXNzT3B0aW9uLFxyXG4gICAgKVxyXG59XHJcblxyXG4vLyBVcGdyYWRlIHlhcm4gLVxyXG4vLyBgY3VybCAtby0gLUwgaHR0cHM6Ly95YXJucGtnLmNvbS9pbnN0YWxsLnNoIHwgYmFzaGBcclxuIl19
