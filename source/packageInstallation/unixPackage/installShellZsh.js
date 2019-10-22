@@ -1,37 +1,38 @@
-const childProcess = require('child_process')
-const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] }
-const { sync: binaryExist } = require('command-exists')
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.install = install;const childProcess = require('child_process');
+const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] };
+const { sync: binaryExist } = require('command-exists');
 
-/*
-- zsh + oh my zsh 
-    - Theme:
-        - https://github.com/romkatv/powerlevel10k
-        - https://github.com/bhilburn/powerlevel9k/wiki/Install-Instructions#step-1-install-powerlevel9k
-    - plugin: 
-        - https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
-        - https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
-        - https://github.com/zsh-users/zsh-completions
-        - https://github.com/zsh-users/zsh-history-substring-search
-    - https://github.com/robbyrussell/oh-my-zsh
-    - Note when installing oh-my-zsh - To prevent issues with line endings when installing `oh-my-zsh` from curl or get from github repo, set git config for crlf to false. i.e. using shell `git config --global core.autocrlf false`
-    - https://www.youtube.com/watch?v=ZAYDoE9Wmkc
-    - change default shell - http://www.peachpit.com/articles/article.aspx?p=659655&seqNum=3
-*/
-export function install() {
-  if (binaryExist('zsh')) console.log('✔ zsh is installed.')
-  else {
-    childProcess.execSync(`sudo apt-get install -y zsh`, childProcessOption)
-    // oh-my-zsh
-    childProcess.execSync(`sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"`, childProcessOption)
-    // plugins
-    childProcess.execSync(`git clone https://github.com/zsh-users/zsh-autosuggestions \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions`, childProcessOption)
-    childProcess.execSync(`git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting`, childProcessOption)
-    childProcess.execSync(`git clone https://github.com/zsh-users/zsh-completions \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions`, childProcessOption)
-    childProcess.execSync(`git clone https://github.com/zsh-users/zsh-history-substring-search \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search`, childProcessOption)
-    // powerlevel10k theme
-    childProcess.execSync(`git clone https://github.com/romkatv/powerlevel10k.git \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k`, childProcessOption)
-    // set default shell - make zsh default shell.
-    childProcess.execSync(`sudo chsh --shell $(which zsh)`, childProcessOption)
-    childProcess.execSync(`echo "Current shell: $SHELL"`, childProcessOption)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function install() {
+  if (binaryExist('zsh')) console.log('✔ zsh is installed.');else
+  {
+    childProcess.execSync(`sudo apt-get install -y zsh`, childProcessOption);
+
+    childProcess.execSync(`sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"`, childProcessOption);
+
+    childProcess.execSync(`git clone https://github.com/zsh-users/zsh-autosuggestions \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions`, childProcessOption);
+    childProcess.execSync(`git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting`, childProcessOption);
+    childProcess.execSync(`git clone https://github.com/zsh-users/zsh-completions \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions`, childProcessOption);
+    childProcess.execSync(`git clone https://github.com/zsh-users/zsh-history-substring-search \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search`, childProcessOption);
+
+    childProcess.execSync(`git clone https://github.com/romkatv/powerlevel10k.git \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k`, childProcessOption);
+
+    childProcess.execSync(`sudo chsh --shell $(which zsh)`, childProcessOption);
+    childProcess.execSync(`echo "Current shell: $SHELL"`, childProcessOption);
   }
 }
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NvdXJjZS9wYWNrYWdlSW5zdGFsbGF0aW9uL3VuaXhQYWNrYWdlL2luc3RhbGxTaGVsbFpzaC5qcyJdLCJuYW1lcyI6WyJjaGlsZFByb2Nlc3MiLCJyZXF1aXJlIiwiY2hpbGRQcm9jZXNzT3B0aW9uIiwiY3dkIiwiX19kaXJuYW1lIiwic2hlbGwiLCJzdGRpbyIsInN5bmMiLCJiaW5hcnlFeGlzdCIsImluc3RhbGwiLCJjb25zb2xlIiwibG9nIiwiZXhlY1N5bmMiXSwibWFwcGluZ3MiOiJxR0FBQSxNQUFNQSxZQUFZLEdBQUdDLE9BQU8sQ0FBQyxlQUFELENBQTVCO0FBQ0EsTUFBTUMsa0JBQWtCLEdBQUcsRUFBRUMsR0FBRyxFQUFFQyxTQUFQLEVBQWtCQyxLQUFLLEVBQUUsSUFBekIsRUFBK0JDLEtBQUssRUFBRSxDQUFDLENBQUQsRUFBSSxDQUFKLEVBQU8sQ0FBUCxDQUF0QyxFQUEzQjtBQUNBLE1BQU0sRUFBRUMsSUFBSSxFQUFFQyxXQUFSLEtBQXdCUCxPQUFPLENBQUMsZ0JBQUQsQ0FBckM7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBaUJPLFNBQVNRLE9BQVQsR0FBbUI7QUFDeEIsTUFBSUQsV0FBVyxDQUFDLEtBQUQsQ0FBZixFQUF3QkUsT0FBTyxDQUFDQyxHQUFSLENBQVkscUJBQVosRUFBeEI7QUFDSztBQUNIWCxJQUFBQSxZQUFZLENBQUNZLFFBQWIsQ0FBdUIsNkJBQXZCLEVBQXFEVixrQkFBckQ7O0FBRUFGLElBQUFBLFlBQVksQ0FBQ1ksUUFBYixDQUF1Qix3R0FBdkIsRUFBZ0lWLGtCQUFoSTs7QUFFQUYsSUFBQUEsWUFBWSxDQUFDWSxRQUFiLENBQXVCLDRIQUF2QixFQUFvSlYsa0JBQXBKO0FBQ0FGLElBQUFBLFlBQVksQ0FBQ1ksUUFBYixDQUF1Qix3SUFBdkIsRUFBZ0tWLGtCQUFoSztBQUNBRixJQUFBQSxZQUFZLENBQUNZLFFBQWIsQ0FBdUIsb0hBQXZCLEVBQTRJVixrQkFBNUk7QUFDQUYsSUFBQUEsWUFBWSxDQUFDWSxRQUFiLENBQXVCLDhJQUF2QixFQUFzS1Ysa0JBQXRLOztBQUVBRixJQUFBQSxZQUFZLENBQUNZLFFBQWIsQ0FBdUIsaUhBQXZCLEVBQXlJVixrQkFBekk7O0FBRUFGLElBQUFBLFlBQVksQ0FBQ1ksUUFBYixDQUF1QixnQ0FBdkIsRUFBd0RWLGtCQUF4RDtBQUNBRixJQUFBQSxZQUFZLENBQUNZLFFBQWIsQ0FBdUIsOEJBQXZCLEVBQXNEVixrQkFBdEQ7QUFDRDtBQUNGIiwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgY2hpbGRQcm9jZXNzID0gcmVxdWlyZSgnY2hpbGRfcHJvY2VzcycpXHJcbmNvbnN0IGNoaWxkUHJvY2Vzc09wdGlvbiA9IHsgY3dkOiBfX2Rpcm5hbWUsIHNoZWxsOiB0cnVlLCBzdGRpbzogWzAsIDEsIDJdIH1cclxuY29uc3QgeyBzeW5jOiBiaW5hcnlFeGlzdCB9ID0gcmVxdWlyZSgnY29tbWFuZC1leGlzdHMnKVxyXG5cclxuLypcclxuLSB6c2ggKyBvaCBteSB6c2ggXHJcbiAgICAtIFRoZW1lOlxyXG4gICAgICAgIC0gaHR0cHM6Ly9naXRodWIuY29tL3JvbWthdHYvcG93ZXJsZXZlbDEwa1xyXG4gICAgICAgIC0gaHR0cHM6Ly9naXRodWIuY29tL2JoaWxidXJuL3Bvd2VybGV2ZWw5ay93aWtpL0luc3RhbGwtSW5zdHJ1Y3Rpb25zI3N0ZXAtMS1pbnN0YWxsLXBvd2VybGV2ZWw5a1xyXG4gICAgLSBwbHVnaW46IFxyXG4gICAgICAgIC0gaHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtYXV0b3N1Z2dlc3Rpb25zL2Jsb2IvbWFzdGVyL0lOU1RBTEwubWRcclxuICAgICAgICAtIGh0dHBzOi8vZ2l0aHViLmNvbS96c2gtdXNlcnMvenNoLXN5bnRheC1oaWdobGlnaHRpbmcvYmxvYi9tYXN0ZXIvSU5TVEFMTC5tZFxyXG4gICAgICAgIC0gaHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtY29tcGxldGlvbnNcclxuICAgICAgICAtIGh0dHBzOi8vZ2l0aHViLmNvbS96c2gtdXNlcnMvenNoLWhpc3Rvcnktc3Vic3RyaW5nLXNlYXJjaFxyXG4gICAgLSBodHRwczovL2dpdGh1Yi5jb20vcm9iYnlydXNzZWxsL29oLW15LXpzaFxyXG4gICAgLSBOb3RlIHdoZW4gaW5zdGFsbGluZyBvaC1teS16c2ggLSBUbyBwcmV2ZW50IGlzc3VlcyB3aXRoIGxpbmUgZW5kaW5ncyB3aGVuIGluc3RhbGxpbmcgYG9oLW15LXpzaGAgZnJvbSBjdXJsIG9yIGdldCBmcm9tIGdpdGh1YiByZXBvLCBzZXQgZ2l0IGNvbmZpZyBmb3IgY3JsZiB0byBmYWxzZS4gaS5lLiB1c2luZyBzaGVsbCBgZ2l0IGNvbmZpZyAtLWdsb2JhbCBjb3JlLmF1dG9jcmxmIGZhbHNlYFxyXG4gICAgLSBodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PVpBWURvRTlXbWtjXHJcbiAgICAtIGNoYW5nZSBkZWZhdWx0IHNoZWxsIC0gaHR0cDovL3d3dy5wZWFjaHBpdC5jb20vYXJ0aWNsZXMvYXJ0aWNsZS5hc3B4P3A9NjU5NjU1JnNlcU51bT0zXHJcbiovXHJcbmV4cG9ydCBmdW5jdGlvbiBpbnN0YWxsKCkge1xyXG4gIGlmIChiaW5hcnlFeGlzdCgnenNoJykpIGNvbnNvbGUubG9nKCfinJQgenNoIGlzIGluc3RhbGxlZC4nKVxyXG4gIGVsc2Uge1xyXG4gICAgY2hpbGRQcm9jZXNzLmV4ZWNTeW5jKGBzdWRvIGFwdC1nZXQgaW5zdGFsbCAteSB6c2hgLCBjaGlsZFByb2Nlc3NPcHRpb24pXHJcbiAgICAvLyBvaC1teS16c2hcclxuICAgIGNoaWxkUHJvY2Vzcy5leGVjU3luYyhgc2ggLWMgXCIkKGN1cmwgLWZzU0wgaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3JvYmJ5cnVzc2VsbC9vaC1teS16c2gvbWFzdGVyL3Rvb2xzL2luc3RhbGwuc2gpXCJgLCBjaGlsZFByb2Nlc3NPcHRpb24pXHJcbiAgICAvLyBwbHVnaW5zXHJcbiAgICBjaGlsZFByb2Nlc3MuZXhlY1N5bmMoYGdpdCBjbG9uZSBodHRwczovL2dpdGh1Yi5jb20venNoLXVzZXJzL3pzaC1hdXRvc3VnZ2VzdGlvbnMgXFwke1pTSF9DVVNUT006LX4vLm9oLW15LXpzaC9jdXN0b219L3BsdWdpbnMvenNoLWF1dG9zdWdnZXN0aW9uc2AsIGNoaWxkUHJvY2Vzc09wdGlvbilcclxuICAgIGNoaWxkUHJvY2Vzcy5leGVjU3luYyhgZ2l0IGNsb25lIGh0dHBzOi8vZ2l0aHViLmNvbS96c2gtdXNlcnMvenNoLXN5bnRheC1oaWdobGlnaHRpbmcuZ2l0IFxcJHtaU0hfQ1VTVE9NOi1+Ly5vaC1teS16c2gvY3VzdG9tfS9wbHVnaW5zL3pzaC1zeW50YXgtaGlnaGxpZ2h0aW5nYCwgY2hpbGRQcm9jZXNzT3B0aW9uKVxyXG4gICAgY2hpbGRQcm9jZXNzLmV4ZWNTeW5jKGBnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtY29tcGxldGlvbnMgXFwke1pTSF9DVVNUT006LX4vLm9oLW15LXpzaC9jdXN0b219L3BsdWdpbnMvenNoLWNvbXBsZXRpb25zYCwgY2hpbGRQcm9jZXNzT3B0aW9uKVxyXG4gICAgY2hpbGRQcm9jZXNzLmV4ZWNTeW5jKGBnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtaGlzdG9yeS1zdWJzdHJpbmctc2VhcmNoIFxcJHtaU0hfQ1VTVE9NOi1+Ly5vaC1teS16c2gvY3VzdG9tfS9wbHVnaW5zL3pzaC1oaXN0b3J5LXN1YnN0cmluZy1zZWFyY2hgLCBjaGlsZFByb2Nlc3NPcHRpb24pXHJcbiAgICAvLyBwb3dlcmxldmVsMTBrIHRoZW1lXHJcbiAgICBjaGlsZFByb2Nlc3MuZXhlY1N5bmMoYGdpdCBjbG9uZSBodHRwczovL2dpdGh1Yi5jb20vcm9ta2F0di9wb3dlcmxldmVsMTBrLmdpdCBcXCR7WlNIX0NVU1RPTTotfi8ub2gtbXktenNoL2N1c3RvbX0vdGhlbWVzL3Bvd2VybGV2ZWwxMGtgLCBjaGlsZFByb2Nlc3NPcHRpb24pXHJcbiAgICAvLyBzZXQgZGVmYXVsdCBzaGVsbCAtIG1ha2UgenNoIGRlZmF1bHQgc2hlbGwuXHJcbiAgICBjaGlsZFByb2Nlc3MuZXhlY1N5bmMoYHN1ZG8gY2hzaCAtLXNoZWxsICQod2hpY2ggenNoKWAsIGNoaWxkUHJvY2Vzc09wdGlvbilcclxuICAgIGNoaWxkUHJvY2Vzcy5leGVjU3luYyhgZWNobyBcIkN1cnJlbnQgc2hlbGw6ICRTSEVMTFwiYCwgY2hpbGRQcm9jZXNzT3B0aW9uKVxyXG4gIH1cclxufVxyXG4iXX0=
