@@ -1,7 +1,13 @@
 {
-  "name": "source",
-  "main": ".",
+  "name": "@dependency/deploymentProvisioning",
   "version": "1.0.0",
+  "main": "./entrypoint/programmaticAPI",
+	"scripts": {
+		"exportGraphData": "yarn run scriptManager shouldCompileScript=true graphDatabase/exportGraphData \".exportGraphData({targetPath: './resource',fileName: 'taskSequence.graphData.json'})\"",
+		"loadGraphData": "yarn run scriptManager shouldCompileScript=true graphDatabase/exportGraphData \".loadGraphDataFromFile({ shouldClearDatabase: true, graphDataFilePath: './resource/taskSequence.graphData.json' })\"",
+		"buildAndRelease": "yarn run scriptManager shouldCompileScript=true JSProject/buildAndRelease \".moduleProject({})\"",
+		"buildScript": "yarn run scriptManager shouldCompileScript=true JSProject/buildSourceCode \".moduleProject({}, {compile:[/**'./test'*/]})\""
+	},
   "dependencies": {
     "any-promise": "^1.3.0",
     "command-exists": "^1.2.8",
@@ -13,5 +19,11 @@
     "rsync": "^0.6.1",
     "shelljs": "^0.8.3",
     "vinyl-fs": "^3.0.3"
-  }
+  },
+  "devDependencies": {
+		"@dependency/deploymentScript": "https://github.com/AppScriptIO/deploymentScript#semver:^1.x.x",
+		"@dependency/javascriptStaticAnalysis": "https://github.com/AppScriptIO/javascriptStaticAnalysis#semver:^1.x.x",
+		"@dependency/scriptManager": "https://github.com/AppScriptIO/scriptManager#semver:^1.x.x",
+		"typescript": "^3.3.3333"
+	}
 }
