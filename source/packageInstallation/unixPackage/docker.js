@@ -1,28 +1,29 @@
-const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] }
-const childProcess = require('child_process')
-const { sync: binaryExist } = require('command-exists')
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.install = install;const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] };
+const childProcess = require('child_process');
+const { sync: binaryExist } = require('command-exists');
 
-/* Install docker client: https://davidburela.wordpress.com/2018/06/27/running-docker-on-wsl-windows-subsystem-for-linux/
-  After which docker command will run WSL Docker Client to Windows Docker Engine
-  ```WSL
-  docker ps 
-  ```
-*/
-export function install() {
-  if (binaryExist('docker')) console.log('✔ docker is installed.')
-  else
-    childProcess.execSync(
-      [
-        `sudo apt-get update -y && sudo apt-get upgrade -y`,
-        `sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common`,
-        `curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -`,
-        `sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable nightly"`,
-        `sudo apt-get update -y`,
-        `sudo apt-get install -y docker-ce docker-ce-cli containerd.io`,
-        `sudo usermod -aG docker $USER`,
-        // If this variable doesn't persist between PC reboots, then add `export DOCKER_HOST=tcp://127.0.0.1:2375` to .bashrc or the current shell config file, so it will run each time shell is initialized.
-        `export DOCKER_HOST=tcp://127.0.0.1:2375`,
-      ].join(' && \\\n'),
-      childProcessOption,
-    )
+
+
+
+
+
+
+function install() {
+  if (binaryExist('docker')) console.log('✔ docker is installed.');else
+
+  childProcess.execSync(
+  [
+  `sudo apt-get update -y && sudo apt-get upgrade -y`,
+  `sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common`,
+  `curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -`,
+  `sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable nightly"`,
+  `sudo apt-get update -y`,
+  `sudo apt-get install -y docker-ce docker-ce-cli containerd.io`,
+  `sudo usermod -aG docker $USER`,
+
+  `export DOCKER_HOST=tcp://127.0.0.1:2375`].
+  join(' && \\\n'),
+  childProcessOption);
+
 }
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NvdXJjZS9wYWNrYWdlSW5zdGFsbGF0aW9uL3VuaXhQYWNrYWdlL2RvY2tlci5qcyJdLCJuYW1lcyI6WyJjaGlsZFByb2Nlc3NPcHRpb24iLCJjd2QiLCJfX2Rpcm5hbWUiLCJzaGVsbCIsInN0ZGlvIiwiY2hpbGRQcm9jZXNzIiwicmVxdWlyZSIsInN5bmMiLCJiaW5hcnlFeGlzdCIsImluc3RhbGwiLCJjb25zb2xlIiwibG9nIiwiZXhlY1N5bmMiLCJqb2luIl0sIm1hcHBpbmdzIjoicUdBQUEsTUFBTUEsa0JBQWtCLEdBQUcsRUFBRUMsR0FBRyxFQUFFQyxTQUFQLEVBQWtCQyxLQUFLLEVBQUUsSUFBekIsRUFBK0JDLEtBQUssRUFBRSxDQUFDLENBQUQsRUFBSSxDQUFKLEVBQU8sQ0FBUCxDQUF0QyxFQUEzQjtBQUNBLE1BQU1DLFlBQVksR0FBR0MsT0FBTyxDQUFDLGVBQUQsQ0FBNUI7QUFDQSxNQUFNLEVBQUVDLElBQUksRUFBRUMsV0FBUixLQUF3QkYsT0FBTyxDQUFDLGdCQUFELENBQXJDOzs7Ozs7OztBQVFPLFNBQVNHLE9BQVQsR0FBbUI7QUFDeEIsTUFBSUQsV0FBVyxDQUFDLFFBQUQsQ0FBZixFQUEyQkUsT0FBTyxDQUFDQyxHQUFSLENBQVksd0JBQVosRUFBM0I7O0FBRUVOLEVBQUFBLFlBQVksQ0FBQ08sUUFBYjtBQUNFO0FBQ0cscURBREg7QUFFRyxzR0FGSDtBQUdHLGdGQUhIO0FBSUcseUhBSkg7QUFLRywwQkFMSDtBQU1HLGlFQU5IO0FBT0csaUNBUEg7O0FBU0csMkNBVEg7QUFVRUMsRUFBQUEsSUFWRixDQVVPLFVBVlAsQ0FERjtBQVlFYixFQUFBQSxrQkFaRjs7QUFjSCIsInNvdXJjZXNDb250ZW50IjpbImNvbnN0IGNoaWxkUHJvY2Vzc09wdGlvbiA9IHsgY3dkOiBfX2Rpcm5hbWUsIHNoZWxsOiB0cnVlLCBzdGRpbzogWzAsIDEsIDJdIH1cclxuY29uc3QgY2hpbGRQcm9jZXNzID0gcmVxdWlyZSgnY2hpbGRfcHJvY2VzcycpXHJcbmNvbnN0IHsgc3luYzogYmluYXJ5RXhpc3QgfSA9IHJlcXVpcmUoJ2NvbW1hbmQtZXhpc3RzJylcclxuXHJcbi8qIEluc3RhbGwgZG9ja2VyIGNsaWVudDogaHR0cHM6Ly9kYXZpZGJ1cmVsYS53b3JkcHJlc3MuY29tLzIwMTgvMDYvMjcvcnVubmluZy1kb2NrZXItb24td3NsLXdpbmRvd3Mtc3Vic3lzdGVtLWZvci1saW51eC9cclxuICBBZnRlciB3aGljaCBkb2NrZXIgY29tbWFuZCB3aWxsIHJ1biBXU0wgRG9ja2VyIENsaWVudCB0byBXaW5kb3dzIERvY2tlciBFbmdpbmVcclxuICBgYGBXU0xcclxuICBkb2NrZXIgcHMgXHJcbiAgYGBgXHJcbiovXHJcbmV4cG9ydCBmdW5jdGlvbiBpbnN0YWxsKCkge1xyXG4gIGlmIChiaW5hcnlFeGlzdCgnZG9ja2VyJykpIGNvbnNvbGUubG9nKCfinJQgZG9ja2VyIGlzIGluc3RhbGxlZC4nKVxyXG4gIGVsc2VcclxuICAgIGNoaWxkUHJvY2Vzcy5leGVjU3luYyhcclxuICAgICAgW1xyXG4gICAgICAgIGBzdWRvIGFwdC1nZXQgdXBkYXRlIC15ICYmIHN1ZG8gYXB0LWdldCB1cGdyYWRlIC15YCxcclxuICAgICAgICBgc3VkbyBhcHQtZ2V0IGluc3RhbGwgLXkgYXB0LXRyYW5zcG9ydC1odHRwcyBjYS1jZXJ0aWZpY2F0ZXMgY3VybCBnbnVwZzIgc29mdHdhcmUtcHJvcGVydGllcy1jb21tb25gLFxyXG4gICAgICAgIGBjdXJsIC1mc1NMIGh0dHBzOi8vZG93bmxvYWQuZG9ja2VyLmNvbS9saW51eC9kZWJpYW4vZ3BnIHwgc3VkbyBhcHQta2V5IGFkZCAtYCxcclxuICAgICAgICBgc3VkbyBhZGQtYXB0LXJlcG9zaXRvcnkgXCJkZWIgW2FyY2g9YW1kNjRdIGh0dHBzOi8vZG93bmxvYWQuZG9ja2VyLmNvbS9saW51eC9kZWJpYW4gJChsc2JfcmVsZWFzZSAtY3MpIHN0YWJsZSBuaWdodGx5XCJgLFxyXG4gICAgICAgIGBzdWRvIGFwdC1nZXQgdXBkYXRlIC15YCxcclxuICAgICAgICBgc3VkbyBhcHQtZ2V0IGluc3RhbGwgLXkgZG9ja2VyLWNlIGRvY2tlci1jZS1jbGkgY29udGFpbmVyZC5pb2AsXHJcbiAgICAgICAgYHN1ZG8gdXNlcm1vZCAtYUcgZG9ja2VyICRVU0VSYCxcclxuICAgICAgICAvLyBJZiB0aGlzIHZhcmlhYmxlIGRvZXNuJ3QgcGVyc2lzdCBiZXR3ZWVuIFBDIHJlYm9vdHMsIHRoZW4gYWRkIGBleHBvcnQgRE9DS0VSX0hPU1Q9dGNwOi8vMTI3LjAuMC4xOjIzNzVgIHRvIC5iYXNocmMgb3IgdGhlIGN1cnJlbnQgc2hlbGwgY29uZmlnIGZpbGUsIHNvIGl0IHdpbGwgcnVuIGVhY2ggdGltZSBzaGVsbCBpcyBpbml0aWFsaXplZC5cclxuICAgICAgICBgZXhwb3J0IERPQ0tFUl9IT1NUPXRjcDovLzEyNy4wLjAuMToyMzc1YCxcclxuICAgICAgXS5qb2luKCcgJiYgXFxcXFxcbicpLFxyXG4gICAgICBjaGlsZFByb2Nlc3NPcHRpb24sXHJcbiAgICApXHJcbn1cclxuIl19
