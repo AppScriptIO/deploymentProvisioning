@@ -16,3 +16,7 @@ export * as copy from './filesystemOperation/copy.js'
 export * as symlink from './filesystemOperation/symlink.js'
 export * as checkExistence from './filesystemOperation/checkExistence.js'
 export * as synchronize from './filesystemOperation/synchronize.js'
+
+export * as memgraphContainer from './dockerContainer/memgraphContainer.js'
+export * as neo4jContainer from './dockerContainer/neo4jContainer.js'
+export * as redisGraphContainer from './dockerContainer/redisGraphContainer.js'
