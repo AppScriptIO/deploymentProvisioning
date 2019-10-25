@@ -1,31 +1,31 @@
-const childProcess = require('child_process')
-const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] }
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.runDockerContainer = runDockerContainer;const childProcess = require('child_process');
+const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] };
 
-// https://neo4j.com/developer/docker-run-neo4j/
 
-// APOC http://neo4j-contrib.github.io/neo4j-apoc-procedures/3.4/installation/
-// https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/tag/3.5.0.4
-// USAGE for exporting json database, through using Cepher APOC extensions: `CALL apoc.export.json.all("all.json",{useTypes:true})`
 
-//dump initial config file values:
 
-// docker run --rm --volume=$PWD/temporary/neo4j/conf:/conf neo4j:latest dump-config
-// -v $PWD/temporary/neo4j/conf:/conf \
 
-// mkdir -p $PWD/temporary/neo4j/data
-// mkdir -p $PWD/temporary/neo4j/logs
-// mkdir -p $PWD/temporary/neo4j/conf
-// mkdir -p $PWD/temporary/neo4j/plugins
-// mkdir -p $PWD/temporary/neo4j/import
 
-export function runDockerContainer() {
-  console.log(`• Running container: neo4j on port 7687`)
-  // TODO: This is a quick automatic starting of dependency container. Provide a better way to handle container dependencies.
+
+
+
+
+
+
+
+
+
+
+
+
+function runDockerContainer() {
+  console.log(`• Running container: neo4j on port 7687`);
+
   try {
     childProcess.execSync(
-      [
-        'docker rm -f neo4j',
-        `
+    [
+    'docker rm -f neo4j',
+    `
             docker run \
             --name neo4j \
             -p 7474:7474 -p 7686:7687  \
@@ -40,11 +40,12 @@ export function runDockerContainer() {
             -e NEO4J_apoc_import_file_enabled=true \
             -e NEO4J_apoc_import_file_use__neo4j__config=true \
             neo4j:latest
-        `,
-      ].join(' && \\\n'),
-      childProcessOption,
-    )
+        `].
+    join(' && \\\n'),
+    childProcessOption);
+
   } catch (error) {
-    throw error
+    throw error;
   }
 }
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NvdXJjZS9kb2NrZXJDb250YWluZXIvbmVvNGpDb250YWluZXIuanMiXSwibmFtZXMiOlsiY2hpbGRQcm9jZXNzIiwicmVxdWlyZSIsImNoaWxkUHJvY2Vzc09wdGlvbiIsImN3ZCIsIl9fZGlybmFtZSIsInNoZWxsIiwic3RkaW8iLCJydW5Eb2NrZXJDb250YWluZXIiLCJjb25zb2xlIiwibG9nIiwiZXhlY1N5bmMiLCJqb2luIiwiZXJyb3IiXSwibWFwcGluZ3MiOiIySEFBQSxNQUFNQSxZQUFZLEdBQUdDLE9BQU8sQ0FBQyxlQUFELENBQTVCO0FBQ0EsTUFBTUMsa0JBQWtCLEdBQUcsRUFBRUMsR0FBRyxFQUFFQyxTQUFQLEVBQWtCQyxLQUFLLEVBQUUsSUFBekIsRUFBK0JDLEtBQUssRUFBRSxDQUFDLENBQUQsRUFBSSxDQUFKLEVBQU8sQ0FBUCxDQUF0QyxFQUEzQjs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQW1CTyxTQUFTQyxrQkFBVCxHQUE4QjtBQUNuQ0MsRUFBQUEsT0FBTyxDQUFDQyxHQUFSLENBQWEseUNBQWI7O0FBRUEsTUFBSTtBQUNGVCxJQUFBQSxZQUFZLENBQUNVLFFBQWI7QUFDRTtBQUNFLHdCQURGO0FBRUc7Ozs7Ozs7Ozs7Ozs7OztTQUZIO0FBa0JFQyxJQUFBQSxJQWxCRixDQWtCTyxVQWxCUCxDQURGO0FBb0JFVCxJQUFBQSxrQkFwQkY7O0FBc0JELEdBdkJELENBdUJFLE9BQU9VLEtBQVAsRUFBYztBQUNkLFVBQU1BLEtBQU47QUFDRDtBQUNGIiwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgY2hpbGRQcm9jZXNzID0gcmVxdWlyZSgnY2hpbGRfcHJvY2VzcycpXHJcbmNvbnN0IGNoaWxkUHJvY2Vzc09wdGlvbiA9IHsgY3dkOiBfX2Rpcm5hbWUsIHNoZWxsOiB0cnVlLCBzdGRpbzogWzAsIDEsIDJdIH1cclxuXHJcbi8vIGh0dHBzOi8vbmVvNGouY29tL2RldmVsb3Blci9kb2NrZXItcnVuLW5lbzRqL1xyXG5cclxuLy8gQVBPQyBodHRwOi8vbmVvNGotY29udHJpYi5naXRodWIuaW8vbmVvNGotYXBvYy1wcm9jZWR1cmVzLzMuNC9pbnN0YWxsYXRpb24vXHJcbi8vIGh0dHBzOi8vZ2l0aHViLmNvbS9uZW80ai1jb250cmliL25lbzRqLWFwb2MtcHJvY2VkdXJlcy9yZWxlYXNlcy90YWcvMy41LjAuNFxyXG4vLyBVU0FHRSBmb3IgZXhwb3J0aW5nIGpzb24gZGF0YWJhc2UsIHRocm91Z2ggdXNpbmcgQ2VwaGVyIEFQT0MgZXh0ZW5zaW9uczogYENBTEwgYXBvYy5leHBvcnQuanNvbi5hbGwoXCJhbGwuanNvblwiLHt1c2VUeXBlczp0cnVlfSlgXHJcblxyXG4vL2R1bXAgaW5pdGlhbCBjb25maWcgZmlsZSB2YWx1ZXM6XHJcblxyXG4vLyBkb2NrZXIgcnVuIC0tcm0gLS12b2x1bWU9JFBXRC90ZW1wb3JhcnkvbmVvNGovY29uZjovY29uZiBuZW80ajpsYXRlc3QgZHVtcC1jb25maWdcclxuLy8gLXYgJFBXRC90ZW1wb3JhcnkvbmVvNGovY29uZjovY29uZiBcXFxyXG5cclxuLy8gbWtkaXIgLXAgJFBXRC90ZW1wb3JhcnkvbmVvNGovZGF0YVxyXG4vLyBta2RpciAtcCAkUFdEL3RlbXBvcmFyeS9uZW80ai9sb2dzXHJcbi8vIG1rZGlyIC1wICRQV0QvdGVtcG9yYXJ5L25lbzRqL2NvbmZcclxuLy8gbWtkaXIgLXAgJFBXRC90ZW1wb3JhcnkvbmVvNGovcGx1Z2luc1xyXG4vLyBta2RpciAtcCAkUFdEL3RlbXBvcmFyeS9uZW80ai9pbXBvcnRcclxuXHJcbmV4cG9ydCBmdW5jdGlvbiBydW5Eb2NrZXJDb250YWluZXIoKSB7XHJcbiAgY29uc29sZS5sb2coYOKAoiBSdW5uaW5nIGNvbnRhaW5lcjogbmVvNGogb24gcG9ydCA3Njg3YClcclxuICAvLyBUT0RPOiBUaGlzIGlzIGEgcXVpY2sgYXV0b21hdGljIHN0YXJ0aW5nIG9mIGRlcGVuZGVuY3kgY29udGFpbmVyLiBQcm92aWRlIGEgYmV0dGVyIHdheSB0byBoYW5kbGUgY29udGFpbmVyIGRlcGVuZGVuY2llcy5cclxuICB0cnkge1xyXG4gICAgY2hpbGRQcm9jZXNzLmV4ZWNTeW5jKFxyXG4gICAgICBbXHJcbiAgICAgICAgJ2RvY2tlciBybSAtZiBuZW80aicsXHJcbiAgICAgICAgYFxyXG4gICAgICAgICAgICBkb2NrZXIgcnVuIFxcXHJcbiAgICAgICAgICAgIC0tbmFtZSBuZW80aiBcXFxyXG4gICAgICAgICAgICAtcCA3NDc0Ojc0NzQgLXAgNzY4Njo3Njg3ICBcXFxyXG4gICAgICAgICAgICAtZCBcXFxyXG4gICAgICAgICAgICAtdiAkUFdEL3RlbXBvcmFyeS9uZW80ai9sb2dzOi9sb2dzIFxcXHJcbiAgICAgICAgICAgIC12ICRQV0QvdGVtcG9yYXJ5L25lbzRqL3BsdWdpbnM6L3BsdWdpbnMgXFxcclxuICAgICAgICAgICAgLXYgJFBXRC90ZW1wb3JhcnkvbmVvNGovaW1wb3J0Oi92YXIvbGliL25lbzRqL2ltcG9ydC8gXFxcclxuICAgICAgICAgICAgLXYgJFBXRC90ZW1wb3JhcnkvbmVvNGovZGF0YTovZGF0YSBcXFxyXG4gICAgICAgICAgICAtLWVudiBORU80Sl9BVVRIPW5lbzRqL3Rlc3QgXFxcclxuICAgICAgICAgICAgLWUgTkVPNEpfZGJtc19zZWN1cml0eV9wcm9jZWR1cmVzX3VucmVzdHJpY3RlZD1hcG9jLlxcXFxcXCogXFxcclxuICAgICAgICAgICAgLWUgTkVPNEpfYXBvY19leHBvcnRfZmlsZV9lbmFibGVkPXRydWUgXFxcclxuICAgICAgICAgICAgLWUgTkVPNEpfYXBvY19pbXBvcnRfZmlsZV9lbmFibGVkPXRydWUgXFxcclxuICAgICAgICAgICAgLWUgTkVPNEpfYXBvY19pbXBvcnRfZmlsZV91c2VfX25lbzRqX19jb25maWc9dHJ1ZSBcXFxyXG4gICAgICAgICAgICBuZW80ajpsYXRlc3RcclxuICAgICAgICBgLFxyXG4gICAgICBdLmpvaW4oJyAmJiBcXFxcXFxuJyksXHJcbiAgICAgIGNoaWxkUHJvY2Vzc09wdGlvbixcclxuICAgIClcclxuICB9IGNhdGNoIChlcnJvcikge1xyXG4gICAgdGhyb3cgZXJyb3JcclxuICB9XHJcbn1cclxuIl19

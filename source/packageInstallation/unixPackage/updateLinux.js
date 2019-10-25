@@ -1,9 +1,10 @@
-const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] }
-const childProcess = require('child_process')
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.updateAndUpgrade = updateAndUpgrade;const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] };
+const childProcess = require('child_process');
 
-export function updateAndUpgrade() {
-    childProcess.execSync([
-      `sudo apt update -y`,
-      `sudo apt upgrade -y`
-    ].join(' && \\\n'), childProcessOption)
+function updateAndUpgrade() {
+  childProcess.execSync([
+  `sudo apt update -y`,
+  `sudo apt upgrade -y`].
+  join(' && \\\n'), childProcessOption);
 }
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NvdXJjZS9wYWNrYWdlSW5zdGFsbGF0aW9uL3VuaXhQYWNrYWdlL3VwZGF0ZUxpbnV4LmpzIl0sIm5hbWVzIjpbImNoaWxkUHJvY2Vzc09wdGlvbiIsImN3ZCIsIl9fZGlybmFtZSIsInNoZWxsIiwic3RkaW8iLCJjaGlsZFByb2Nlc3MiLCJyZXF1aXJlIiwidXBkYXRlQW5kVXBncmFkZSIsImV4ZWNTeW5jIiwiam9pbiJdLCJtYXBwaW5ncyI6InVIQUFBLE1BQU1BLGtCQUFrQixHQUFHLEVBQUVDLEdBQUcsRUFBRUMsU0FBUCxFQUFrQkMsS0FBSyxFQUFFLElBQXpCLEVBQStCQyxLQUFLLEVBQUUsQ0FBQyxDQUFELEVBQUksQ0FBSixFQUFPLENBQVAsQ0FBdEMsRUFBM0I7QUFDQSxNQUFNQyxZQUFZLEdBQUdDLE9BQU8sQ0FBQyxlQUFELENBQTVCOztBQUVPLFNBQVNDLGdCQUFULEdBQTRCO0FBQy9CRixFQUFBQSxZQUFZLENBQUNHLFFBQWIsQ0FBc0I7QUFDbkIsc0JBRG1CO0FBRW5CLHVCQUZtQjtBQUdwQkMsRUFBQUEsSUFIb0IsQ0FHZixVQUhlLENBQXRCLEVBR29CVCxrQkFIcEI7QUFJSCIsInNvdXJjZXNDb250ZW50IjpbImNvbnN0IGNoaWxkUHJvY2Vzc09wdGlvbiA9IHsgY3dkOiBfX2Rpcm5hbWUsIHNoZWxsOiB0cnVlLCBzdGRpbzogWzAsIDEsIDJdIH1cclxuY29uc3QgY2hpbGRQcm9jZXNzID0gcmVxdWlyZSgnY2hpbGRfcHJvY2VzcycpXHJcblxyXG5leHBvcnQgZnVuY3Rpb24gdXBkYXRlQW5kVXBncmFkZSgpIHtcclxuICAgIGNoaWxkUHJvY2Vzcy5leGVjU3luYyhbXHJcbiAgICAgIGBzdWRvIGFwdCB1cGRhdGUgLXlgLFxyXG4gICAgICBgc3VkbyBhcHQgdXBncmFkZSAteWBcclxuICAgIF0uam9pbignICYmIFxcXFxcXG4nKSwgY2hpbGRQcm9jZXNzT3B0aW9uKVxyXG59XHJcbiJdfQ==

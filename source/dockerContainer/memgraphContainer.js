@@ -1,14 +1,15 @@
-const childProcess = require('child_process')
-const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] }
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.runDockerContainer = runDockerContainer;const childProcess = require('child_process');
+const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] };
 
-// Volumes for memgraph container:
-// `-v mg_lib:/var/lib/memgraph -v mg_log:/var/log/memgraph -v mg_etc:/etc/memgraph`
-export function runDockerContainer() {
-  console.log(`• Running container: memgraph on port 7687`)
-  // TODO: This is a quick automatic starting of dependency container. Provide a better way to handle container dependencies.
+
+
+function runDockerContainer() {
+  console.log(`• Running container: memgraph on port 7687`);
+
   try {
-    childProcess.execSync('docker run -p 7687:7687 -d memgraph', childProcessOption)
+    childProcess.execSync('docker run -p 7687:7687 -d memgraph', childProcessOption);
   } catch (error) {
-    console.log(`• Seems like the container is already running from a previous session, ignore previous error.`)
+    console.log(`• Seems like the container is already running from a previous session, ignore previous error.`);
   }
 }
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NvdXJjZS9kb2NrZXJDb250YWluZXIvbWVtZ3JhcGhDb250YWluZXIuanMiXSwibmFtZXMiOlsiY2hpbGRQcm9jZXNzIiwicmVxdWlyZSIsImNoaWxkUHJvY2Vzc09wdGlvbiIsImN3ZCIsIl9fZGlybmFtZSIsInNoZWxsIiwic3RkaW8iLCJydW5Eb2NrZXJDb250YWluZXIiLCJjb25zb2xlIiwibG9nIiwiZXhlY1N5bmMiLCJlcnJvciJdLCJtYXBwaW5ncyI6IjJIQUFBLE1BQU1BLFlBQVksR0FBR0MsT0FBTyxDQUFDLGVBQUQsQ0FBNUI7QUFDQSxNQUFNQyxrQkFBa0IsR0FBRyxFQUFFQyxHQUFHLEVBQUVDLFNBQVAsRUFBa0JDLEtBQUssRUFBRSxJQUF6QixFQUErQkMsS0FBSyxFQUFFLENBQUMsQ0FBRCxFQUFJLENBQUosRUFBTyxDQUFQLENBQXRDLEVBQTNCOzs7O0FBSU8sU0FBU0Msa0JBQVQsR0FBOEI7QUFDbkNDLEVBQUFBLE9BQU8sQ0FBQ0MsR0FBUixDQUFhLDRDQUFiOztBQUVBLE1BQUk7QUFDRlQsSUFBQUEsWUFBWSxDQUFDVSxRQUFiLENBQXNCLHFDQUF0QixFQUE2RFIsa0JBQTdEO0FBQ0QsR0FGRCxDQUVFLE9BQU9TLEtBQVAsRUFBYztBQUNkSCxJQUFBQSxPQUFPLENBQUNDLEdBQVIsQ0FBYSwrRkFBYjtBQUNEO0FBQ0YiLCJzb3VyY2VzQ29udGVudCI6WyJjb25zdCBjaGlsZFByb2Nlc3MgPSByZXF1aXJlKCdjaGlsZF9wcm9jZXNzJylcbmNvbnN0IGNoaWxkUHJvY2Vzc09wdGlvbiA9IHsgY3dkOiBfX2Rpcm5hbWUsIHNoZWxsOiB0cnVlLCBzdGRpbzogWzAsIDEsIDJdIH1cblxuLy8gVm9sdW1lcyBmb3IgbWVtZ3JhcGggY29udGFpbmVyOlxuLy8gYC12IG1nX2xpYjovdmFyL2xpYi9tZW1ncmFwaCAtdiBtZ19sb2c6L3Zhci9sb2cvbWVtZ3JhcGggLXYgbWdfZXRjOi9ldGMvbWVtZ3JhcGhgXG5leHBvcnQgZnVuY3Rpb24gcnVuRG9ja2VyQ29udGFpbmVyKCkge1xuICBjb25zb2xlLmxvZyhg4oCiIFJ1bm5pbmcgY29udGFpbmVyOiBtZW1ncmFwaCBvbiBwb3J0IDc2ODdgKVxuICAvLyBUT0RPOiBUaGlzIGlzIGEgcXVpY2sgYXV0b21hdGljIHN0YXJ0aW5nIG9mIGRlcGVuZGVuY3kgY29udGFpbmVyLiBQcm92aWRlIGEgYmV0dGVyIHdheSB0byBoYW5kbGUgY29udGFpbmVyIGRlcGVuZGVuY2llcy5cbiAgdHJ5IHtcbiAgICBjaGlsZFByb2Nlc3MuZXhlY1N5bmMoJ2RvY2tlciBydW4gLXAgNzY4Nzo3Njg3IC1kIG1lbWdyYXBoJywgY2hpbGRQcm9jZXNzT3B0aW9uKVxuICB9IGNhdGNoIChlcnJvcikge1xuICAgIGNvbnNvbGUubG9nKGDigKIgU2VlbXMgbGlrZSB0aGUgY29udGFpbmVyIGlzIGFscmVhZHkgcnVubmluZyBmcm9tIGEgcHJldmlvdXMgc2Vzc2lvbiwgaWdub3JlIHByZXZpb3VzIGVycm9yLmApXG4gIH1cbn1cbiJdfQ==
