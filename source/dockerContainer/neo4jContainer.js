@@ -18,28 +18,35 @@ const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] }
 // mkdir -p $PWD/temporary/neo4j/plugins
 // mkdir -p $PWD/temporary/neo4j/import
 
+// -v $PWD/temporary/neo4j/logs:/logs \
+// -v $PWD/temporary/neo4j/plugins:/plugins \
+// -v $PWD/temporary/neo4j/import:/var/lib/neo4j/import/ \
+// -v $PWD/temporary/neo4j/data:/data \
+// -e NEO4J_dbms_security_procedures_unrestricted=apoc.\\\* \
+// -e NEO4J_apoc_export_file_enabled=true \
+// -e NEO4J_apoc_import_file_enabled=true \
+// -e NEO4J_apoc_import_file_use__neo4j__config=true \
+
 export function runDockerContainer() {
-  console.log(`• Running container: neo4j on port 7687`)
+  console.log(`• Running container: neo4j on port 7686`)
   // TODO: This is a quick automatic starting of dependency container. Provide a better way to handle container dependencies.
   try {
     childProcess.execSync(
       [
-        'docker rm -f neo4j',
         `
-            docker run \
+        if [ ! "$(docker ps -q -f name=neo4j)" ]; then
+          if [ "$(docker ps -aq -f status=exited -f name=neo4j)" ]; then
+              # cleanup
+              docker rm neo4j
+          fi
+
+          docker run \
             --name neo4j \
             -p 7474:7474 -p 7686:7687  \
             -d \
-            -v $PWD/temporary/neo4j/logs:/logs \
-            -v $PWD/temporary/neo4j/plugins:/plugins \
-            -v $PWD/temporary/neo4j/import:/var/lib/neo4j/import/ \
-            -v $PWD/temporary/neo4j/data:/data \
             --env NEO4J_AUTH=neo4j/test \
-            -e NEO4J_dbms_security_procedures_unrestricted=apoc.\\\* \
-            -e NEO4J_apoc_export_file_enabled=true \
-            -e NEO4J_apoc_import_file_enabled=true \
-            -e NEO4J_apoc_import_file_use__neo4j__config=true \
             neo4j:latest
+        fi
         `,
       ].join(' && \\\n'),
       childProcessOption,
