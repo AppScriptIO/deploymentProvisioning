@@ -10,6 +10,7 @@ export * as jspm from './packageInstallation/unixPackage/jspm.js'
 export * as zshShell from './packageInstallation/unixPackage/zshShell.js'
 export * as yarn from './packageInstallation/unixPackage/yarn.js'
 export * as nodegit from './packageInstallation/unixPackage/nodegit.js'
+export * as nodeVersionManagement from './packageInstallation/unixPackage/nodeVersionManagement.js'
 export * as updateLinux from './packageInstallation/unixPackage/updateLinux.js'
 
 export * as copy from './filesystemOperation/copy.js'

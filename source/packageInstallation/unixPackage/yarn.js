@@ -43,6 +43,7 @@ export function install() {
       [
         'curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -',
         'echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list',
+        // Importanat: must install yarn with `sudo` ie.. as root, because the yarn installation will allow all users to use yarn binary.
         'sudo apt-get -y update && sudo apt-get install -y yarn',
       ].join(' && \\\n'),
       childProcessOption,
