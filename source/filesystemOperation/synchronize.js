@@ -1,100 +1,101 @@
-import path from 'path'
-import util from 'util'
-import stream from 'stream'
-const pipeline = util.promisify(stream.pipeline)
-import mkdirp from 'mkdirp'
-import Rsync from 'rsync'
-import size from 'gulp-size'
-import plumber from 'gulp-plumber'
-import { src as readFileAsObjectStream, dest as writeFileFromObjectStream } from 'vinyl-fs'
-import { reject } from 'any-promise'
+"use strict";var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");Object.defineProperty(exports, "__esModule", { value: true });exports.recursivelySyncFile = recursivelySyncFile;exports.copyFileAndSymlink = copyFileAndSymlink;
+var _util = _interopRequireDefault(require("util"));
+var _stream = _interopRequireDefault(require("stream"));
 
-/*
-import rsyncObjectStream from 'gulp-rsync'
-import gulp from 'gulp'
-// using gulp-rsync
-function gulpRsync(baseSource, source, destination) {
-  return gulp.src(source)
-    .pipe(rsyncObjectStream({
-      // paths outside of root cannot be specified.
-      root: baseSource,
-      destination: destination,
-      incremental: true,
-      compress: true,
-      // recursive: true,
-      // clean: true, // --delete - deletes files on target. Files which are not present on source.
-      // dryrun: true, // for tests use dryrun which will not change files only mimic the run.
-      // progress: true,
-      // skip files which are newer on target/reciever path.
-      update: true
-      // args this way doesn't work ! should use the equevalent options in API
-      // args: ['--verbose', '--compress', '--update', '--dry-run']
-      // DOESN'T WORK FOR MULTIPLE PATHS - error "outside of root" When relatice is off rsync can recieve multiple paths through gulp.src.
-      // relative: false
-    }))
-}
-*/
+var _mkdirp = _interopRequireDefault(require("mkdirp"));
+var _rsync = _interopRequireDefault(require("rsync"));
+var _gulpSize = _interopRequireDefault(require("gulp-size"));
 
-// implementation using `rsync` module directly
-export function recursivelySyncFile({
-  source, // source folder
+var _vinylFs = require("vinyl-fs");
+var _anyPromise = require("any-promise");const pipeline = _util.default.promisify(_stream.default.pipeline);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function recursivelySyncFile({
+  source,
   destination,
-  copyContentOnly = false, // wether to copy the contents of the root source folder without the root folder  itself.
-  extraOption = {},
-} = {}) {
-  // deal with trailing slash as it may change `rsync` behavior.
-  destination = destination.replace(/\/$/, '') // remove trailing slash from `destination` as it has no effect (both cases are the same)
-  if (copyContentOnly) source = source.substr(-1) != '/' ? `${source}/` : source
-  // add trailing slash - as rsync will copy only contants when trailing slash is present.
-  else source.replace(/\/$/, '') // remove trailing slash.
+  copyContentOnly = false,
+  extraOption = {} } =
+{}) {
+
+  destination = destination.replace(/\/$/, '');
+  if (copyContentOnly) source = source.substr(-1) != '/' ? `${source}/` : source;else
+
+    source.replace(/\/$/, '');
 
   let options = Object.assign(
-    {
-      a: true, // archive
-      // 'v': true, // verbose
-      z: true, // compress
-      R: false, // relative - will create a nested path inside the destination using the full path of the source folder.
-      r: true, // recursive
-    },
-    extraOption,
-  )
+  {
+    a: true,
 
-  let rsync = new Rsync()
-    .flags(options)
-    // .exclude('+ */')
-    // .include('/tmp/source/**/*')
-    .source(source)
-    .destination(destination)
+    z: true,
+    R: false,
+    r: true },
 
-  // Create directory.
+  extraOption);
+
+
+  let rsync = new _rsync.default().
+  flags(options).
+
+
+  source(source).
+  destination(destination);
+
+
   return new Promise(resolve => {
-    mkdirp(destination, function(err) {
-      // Execute the command
+    (0, _mkdirp.default)(destination, function (err) {
+
       rsync.execute(
-        function(error, code, cmd) {
-          if (error) reject(error)
-          console.log(`• RSync ${source} to ${destination}`)
-          resolve()
-        },
-        function(data) {
-          console.log(' ' + data)
-        },
-      )
-    })
-  })
+      function (error, code, cmd) {
+        if (error) (0, _anyPromise.reject)(error);
+        console.log(`• RSync ${source} to ${destination}`);
+        resolve();
+      },
+      function (data) {
+        console.log(' ' + data);
+      });
+
+    });
+  });
 }
 
-// implementation using streams.
-export async function copyFileAndSymlink({
-  source, // list of files or file matching patterns (globs)
-  destination,
-}) {
-  if (!Array.isArray(source)) source = [source]
-  // using `vinyl-fs` module to allow symlinks to be copied as symlinks and not follow down the tree of files.
+
+async function copyFileAndSymlink({
+  source,
+  destination })
+{
+  if (!Array.isArray(source)) source = [source];
+
   return await pipeline(
-    readFileAsObjectStream(source, { followSymlinks: false }),
-    // plumber(),
-    writeFileFromObjectStream(destination, { overwrite: true }),
-    size({ title: 'copyFileAndSymlink' }),
-  )
+  (0, _vinylFs.src)(source, { followSymlinks: false }),
+
+  (0, _vinylFs.dest)(destination, { overwrite: true }),
+  (0, _gulpSize.default)({ title: 'copyFileAndSymlink' }));
+
 }
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NvdXJjZS9maWxlc3lzdGVtT3BlcmF0aW9uL3N5bmNocm9uaXplLmpzIl0sIm5hbWVzIjpbInBpcGVsaW5lIiwidXRpbCIsInByb21pc2lmeSIsInN0cmVhbSIsInJlY3Vyc2l2ZWx5U3luY0ZpbGUiLCJzb3VyY2UiLCJkZXN0aW5hdGlvbiIsImNvcHlDb250ZW50T25seSIsImV4dHJhT3B0aW9uIiwicmVwbGFjZSIsInN1YnN0ciIsIm9wdGlvbnMiLCJPYmplY3QiLCJhc3NpZ24iLCJhIiwieiIsIlIiLCJyIiwicnN5bmMiLCJSc3luYyIsImZsYWdzIiwiUHJvbWlzZSIsInJlc29sdmUiLCJlcnIiLCJleGVjdXRlIiwiZXJyb3IiLCJjb2RlIiwiY21kIiwiY29uc29sZSIsImxvZyIsImRhdGEiLCJjb3B5RmlsZUFuZFN5bWxpbmsiLCJBcnJheSIsImlzQXJyYXkiLCJmb2xsb3dTeW1saW5rcyIsIm92ZXJ3cml0ZSIsInRpdGxlIl0sIm1hcHBpbmdzIjoiO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQSx5Q0FOQSxNQUFNQSxRQUFRLEdBQUdDLGNBQUtDLFNBQUwsQ0FBZUMsZ0JBQU9ILFFBQXRCLENBQWpCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQW1DTyxTQUFTSSxtQkFBVCxDQUE2QjtBQUNsQ0MsRUFBQUEsTUFEa0M7QUFFbENDLEVBQUFBLFdBRmtDO0FBR2xDQyxFQUFBQSxlQUFlLEdBQUcsS0FIZ0I7QUFJbENDLEVBQUFBLFdBQVcsR0FBRyxFQUpvQjtBQUtoQyxFQUxHLEVBS0M7O0FBRU5GLEVBQUFBLFdBQVcsR0FBR0EsV0FBVyxDQUFDRyxPQUFaLENBQW9CLEtBQXBCLEVBQTJCLEVBQTNCLENBQWQ7QUFDQSxNQUFJRixlQUFKLEVBQXFCRixNQUFNLEdBQUdBLE1BQU0sQ0FBQ0ssTUFBUCxDQUFjLENBQUMsQ0FBZixLQUFxQixHQUFyQixHQUE0QixHQUFFTCxNQUFPLEdBQXJDLEdBQTBDQSxNQUFuRCxDQUFyQjs7QUFFS0EsSUFBQUEsTUFBTSxDQUFDSSxPQUFQLENBQWUsS0FBZixFQUFzQixFQUF0Qjs7QUFFTCxNQUFJRSxPQUFPLEdBQUdDLE1BQU0sQ0FBQ0MsTUFBUDtBQUNaO0FBQ0VDLElBQUFBLENBQUMsRUFBRSxJQURMOztBQUdFQyxJQUFBQSxDQUFDLEVBQUUsSUFITDtBQUlFQyxJQUFBQSxDQUFDLEVBQUUsS0FKTDtBQUtFQyxJQUFBQSxDQUFDLEVBQUUsSUFMTCxFQURZOztBQVFaVCxFQUFBQSxXQVJZLENBQWQ7OztBQVdBLE1BQUlVLEtBQUssR0FBRyxJQUFJQyxjQUFKO0FBQ1RDLEVBQUFBLEtBRFMsQ0FDSFQsT0FERzs7O0FBSVROLEVBQUFBLE1BSlMsQ0FJRkEsTUFKRTtBQUtUQyxFQUFBQSxXQUxTLENBS0dBLFdBTEgsQ0FBWjs7O0FBUUEsU0FBTyxJQUFJZSxPQUFKLENBQVlDLE9BQU8sSUFBSTtBQUM1Qix5QkFBT2hCLFdBQVAsRUFBb0IsVUFBU2lCLEdBQVQsRUFBYzs7QUFFaENMLE1BQUFBLEtBQUssQ0FBQ00sT0FBTjtBQUNFLGdCQUFTQyxLQUFULEVBQWdCQyxJQUFoQixFQUFzQkMsR0FBdEIsRUFBMkI7QUFDekIsWUFBSUYsS0FBSixFQUFXLHdCQUFPQSxLQUFQO0FBQ1hHLFFBQUFBLE9BQU8sQ0FBQ0MsR0FBUixDQUFhLFdBQVV4QixNQUFPLE9BQU1DLFdBQVksRUFBaEQ7QUFDQWdCLFFBQUFBLE9BQU87QUFDUixPQUxIO0FBTUUsZ0JBQVNRLElBQVQsRUFBZTtBQUNiRixRQUFBQSxPQUFPLENBQUNDLEdBQVIsQ0FBWSxNQUFNQyxJQUFsQjtBQUNELE9BUkg7O0FBVUQsS0FaRDtBQWFELEdBZE0sQ0FBUDtBQWVEOzs7QUFHTSxlQUFlQyxrQkFBZixDQUFrQztBQUN2QzFCLEVBQUFBLE1BRHVDO0FBRXZDQyxFQUFBQSxXQUZ1QyxFQUFsQztBQUdKO0FBQ0QsTUFBSSxDQUFDMEIsS0FBSyxDQUFDQyxPQUFOLENBQWM1QixNQUFkLENBQUwsRUFBNEJBLE1BQU0sR0FBRyxDQUFDQSxNQUFELENBQVQ7O0FBRTVCLFNBQU8sTUFBTUwsUUFBUTtBQUNuQixvQkFBdUJLLE1BQXZCLEVBQStCLEVBQUU2QixjQUFjLEVBQUUsS0FBbEIsRUFBL0IsQ0FEbUI7O0FBR25CLHFCQUEwQjVCLFdBQTFCLEVBQXVDLEVBQUU2QixTQUFTLEVBQUUsSUFBYixFQUF2QyxDQUhtQjtBQUluQix5QkFBSyxFQUFFQyxLQUFLLEVBQUUsb0JBQVQsRUFBTCxDQUptQixDQUFyQjs7QUFNRCIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBwYXRoIGZyb20gJ3BhdGgnXHJcbmltcG9ydCB1dGlsIGZyb20gJ3V0aWwnXHJcbmltcG9ydCBzdHJlYW0gZnJvbSAnc3RyZWFtJ1xyXG5jb25zdCBwaXBlbGluZSA9IHV0aWwucHJvbWlzaWZ5KHN0cmVhbS5waXBlbGluZSlcclxuaW1wb3J0IG1rZGlycCBmcm9tICdta2RpcnAnXHJcbmltcG9ydCBSc3luYyBmcm9tICdyc3luYydcclxuaW1wb3J0IHNpemUgZnJvbSAnZ3VscC1zaXplJ1xyXG5pbXBvcnQgcGx1bWJlciBmcm9tICdndWxwLXBsdW1iZXInXHJcbmltcG9ydCB7IHNyYyBhcyByZWFkRmlsZUFzT2JqZWN0U3RyZWFtLCBkZXN0IGFzIHdyaXRlRmlsZUZyb21PYmplY3RTdHJlYW0gfSBmcm9tICd2aW55bC1mcydcclxuaW1wb3J0IHsgcmVqZWN0IH0gZnJvbSAnYW55LXByb21pc2UnXHJcblxyXG4vKlxyXG5pbXBvcnQgcnN5bmNPYmplY3RTdHJlYW0gZnJvbSAnZ3VscC1yc3luYydcclxuaW1wb3J0IGd1bHAgZnJvbSAnZ3VscCdcclxuLy8gdXNpbmcgZ3VscC1yc3luY1xyXG5mdW5jdGlvbiBndWxwUnN5bmMoYmFzZVNvdXJjZSwgc291cmNlLCBkZXN0aW5hdGlvbikge1xyXG4gIHJldHVybiBndWxwLnNyYyhzb3VyY2UpXHJcbiAgICAucGlwZShyc3luY09iamVjdFN0cmVhbSh7XHJcbiAgICAgIC8vIHBhdGhzIG91dHNpZGUgb2Ygcm9vdCBjYW5ub3QgYmUgc3BlY2lmaWVkLlxyXG4gICAgICByb290OiBiYXNlU291cmNlLFxyXG4gICAgICBkZXN0aW5hdGlvbjogZGVzdGluYXRpb24sXHJcbiAgICAgIGluY3JlbWVudGFsOiB0cnVlLFxyXG4gICAgICBjb21wcmVzczogdHJ1ZSxcclxuICAgICAgLy8gcmVjdXJzaXZlOiB0cnVlLFxyXG4gICAgICAvLyBjbGVhbjogdHJ1ZSwgLy8gLS1kZWxldGUgLSBkZWxldGVzIGZpbGVzIG9uIHRhcmdldC4gRmlsZXMgd2hpY2ggYXJlIG5vdCBwcmVzZW50IG9uIHNvdXJjZS5cclxuICAgICAgLy8gZHJ5cnVuOiB0cnVlLCAvLyBmb3IgdGVzdHMgdXNlIGRyeXJ1biB3aGljaCB3aWxsIG5vdCBjaGFuZ2UgZmlsZXMgb25seSBtaW1pYyB0aGUgcnVuLlxyXG4gICAgICAvLyBwcm9ncmVzczogdHJ1ZSxcclxuICAgICAgLy8gc2tpcCBmaWxlcyB3aGljaCBhcmUgbmV3ZXIgb24gdGFyZ2V0L3JlY2lldmVyIHBhdGguXHJcbiAgICAgIHVwZGF0ZTogdHJ1ZVxyXG4gICAgICAvLyBhcmdzIHRoaXMgd2F5IGRvZXNuJ3Qgd29yayAhIHNob3VsZCB1c2UgdGhlIGVxdWV2YWxlbnQgb3B0aW9ucyBpbiBBUElcclxuICAgICAgLy8gYXJnczogWyctLXZlcmJvc2UnLCAnLS1jb21wcmVzcycsICctLXVwZGF0ZScsICctLWRyeS1ydW4nXVxyXG4gICAgICAvLyBET0VTTidUIFdPUksgRk9SIE1VTFRJUExFIFBBVEhTIC0gZXJyb3IgXCJvdXRzaWRlIG9mIHJvb3RcIiBXaGVuIHJlbGF0aWNlIGlzIG9mZiByc3luYyBjYW4gcmVjaWV2ZSBtdWx0aXBsZSBwYXRocyB0aHJvdWdoIGd1bHAuc3JjLlxyXG4gICAgICAvLyByZWxhdGl2ZTogZmFsc2VcclxuICAgIH0pKVxyXG59XHJcbiovXHJcblxyXG4vLyBpbXBsZW1lbnRhdGlvbiB1c2luZyBgcnN5bmNgIG1vZHVsZSBkaXJlY3RseVxyXG5leHBvcnQgZnVuY3Rpb24gcmVjdXJzaXZlbHlTeW5jRmlsZSh7XHJcbiAgc291cmNlLCAvLyBzb3VyY2UgZm9sZGVyXHJcbiAgZGVzdGluYXRpb24sXHJcbiAgY29weUNvbnRlbnRPbmx5ID0gZmFsc2UsIC8vIHdldGhlciB0byBjb3B5IHRoZSBjb250ZW50cyBvZiB0aGUgcm9vdCBzb3VyY2UgZm9sZGVyIHdpdGhvdXQgdGhlIHJvb3QgZm9sZGVyICBpdHNlbGYuXHJcbiAgZXh0cmFPcHRpb24gPSB7fSxcclxufSA9IHt9KSB7XHJcbiAgLy8gZGVhbCB3aXRoIHRyYWlsaW5nIHNsYXNoIGFzIGl0IG1heSBjaGFuZ2UgYHJzeW5jYCBiZWhhdmlvci5cclxuICBkZXN0aW5hdGlvbiA9IGRlc3RpbmF0aW9uLnJlcGxhY2UoL1xcLyQvLCAnJykgLy8gcmVtb3ZlIHRyYWlsaW5nIHNsYXNoIGZyb20gYGRlc3RpbmF0aW9uYCBhcyBpdCBoYXMgbm8gZWZmZWN0IChib3RoIGNhc2VzIGFyZSB0aGUgc2FtZSlcclxuICBpZiAoY29weUNvbnRlbnRPbmx5KSBzb3VyY2UgPSBzb3VyY2Uuc3Vic3RyKC0xKSAhPSAnLycgPyBgJHtzb3VyY2V9L2AgOiBzb3VyY2VcclxuICAvLyBhZGQgdHJhaWxpbmcgc2xhc2ggLSBhcyByc3luYyB3aWxsIGNvcHkgb25seSBjb250YW50cyB3aGVuIHRyYWlsaW5nIHNsYXNoIGlzIHByZXNlbnQuXHJcbiAgZWxzZSBzb3VyY2UucmVwbGFjZSgvXFwvJC8sICcnKSAvLyByZW1vdmUgdHJhaWxpbmcgc2xhc2guXHJcblxyXG4gIGxldCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcclxuICAgIHtcclxuICAgICAgYTogdHJ1ZSwgLy8gYXJjaGl2ZVxyXG4gICAgICAvLyAndic6IHRydWUsIC8vIHZlcmJvc2VcclxuICAgICAgejogdHJ1ZSwgLy8gY29tcHJlc3NcclxuICAgICAgUjogZmFsc2UsIC8vIHJlbGF0aXZlIC0gd2lsbCBjcmVhdGUgYSBuZXN0ZWQgcGF0aCBpbnNpZGUgdGhlIGRlc3RpbmF0aW9uIHVzaW5nIHRoZSBmdWxsIHBhdGggb2YgdGhlIHNvdXJjZSBmb2xkZXIuXHJcbiAgICAgIHI6IHRydWUsIC8vIHJlY3Vyc2l2ZVxyXG4gICAgfSxcclxuICAgIGV4dHJhT3B0aW9uLFxyXG4gIClcclxuXHJcbiAgbGV0IHJzeW5jID0gbmV3IFJzeW5jKClcclxuICAgIC5mbGFncyhvcHRpb25zKVxyXG4gICAgLy8gLmV4Y2x1ZGUoJysgKi8nKVxyXG4gICAgLy8gLmluY2x1ZGUoJy90bXAvc291cmNlLyoqLyonKVxyXG4gICAgLnNvdXJjZShzb3VyY2UpXHJcbiAgICAuZGVzdGluYXRpb24oZGVzdGluYXRpb24pXHJcblxyXG4gIC8vIENyZWF0ZSBkaXJlY3RvcnkuXHJcbiAgcmV0dXJuIG5ldyBQcm9taXNlKHJlc29sdmUgPT4ge1xyXG4gICAgbWtkaXJwKGRlc3RpbmF0aW9uLCBmdW5jdGlvbihlcnIpIHtcclxuICAgICAgLy8gRXhlY3V0ZSB0aGUgY29tbWFuZFxyXG4gICAgICByc3luYy5leGVjdXRlKFxyXG4gICAgICAgIGZ1bmN0aW9uKGVycm9yLCBjb2RlLCBjbWQpIHtcclxuICAgICAgICAgIGlmIChlcnJvcikgcmVqZWN0KGVycm9yKVxyXG4gICAgICAgICAgY29uc29sZS5sb2coYOKAoiBSU3luYyAke3NvdXJjZX0gdG8gJHtkZXN0aW5hdGlvbn1gKVxyXG4gICAgICAgICAgcmVzb2x2ZSgpXHJcbiAgICAgICAgfSxcclxuICAgICAgICBmdW5jdGlvbihkYXRhKSB7XHJcbiAgICAgICAgICBjb25zb2xlLmxvZygnICcgKyBkYXRhKVxyXG4gICAgICAgIH0sXHJcbiAgICAgIClcclxuICAgIH0pXHJcbiAgfSlcclxufVxyXG5cclxuLy8gaW1wbGVtZW50YXRpb24gdXNpbmcgc3RyZWFtcy5cclxuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIGNvcHlGaWxlQW5kU3ltbGluayh7XHJcbiAgc291cmNlLCAvLyBsaXN0IG9mIGZpbGVzIG9yIGZpbGUgbWF0Y2hpbmcgcGF0dGVybnMgKGdsb2JzKVxyXG4gIGRlc3RpbmF0aW9uLFxyXG59KSB7XHJcbiAgaWYgKCFBcnJheS5pc0FycmF5KHNvdXJjZSkpIHNvdXJjZSA9IFtzb3VyY2VdXHJcbiAgLy8gdXNpbmcgYHZpbnlsLWZzYCBtb2R1bGUgdG8gYWxsb3cgc3ltbGlua3MgdG8gYmUgY29waWVkIGFzIHN5bWxpbmtzIGFuZCBub3QgZm9sbG93IGRvd24gdGhlIHRyZWUgb2YgZmlsZXMuXHJcbiAgcmV0dXJuIGF3YWl0IHBpcGVsaW5lKFxyXG4gICAgcmVhZEZpbGVBc09iamVjdFN0cmVhbShzb3VyY2UsIHsgZm9sbG93U3ltbGlua3M6IGZhbHNlIH0pLFxyXG4gICAgLy8gcGx1bWJlcigpLFxyXG4gICAgd3JpdGVGaWxlRnJvbU9iamVjdFN0cmVhbShkZXN0aW5hdGlvbiwgeyBvdmVyd3JpdGU6IHRydWUgfSksXHJcbiAgICBzaXplKHsgdGl0bGU6ICdjb3B5RmlsZUFuZFN5bWxpbmsnIH0pLFxyXG4gIClcclxufVxyXG4iXX0=
