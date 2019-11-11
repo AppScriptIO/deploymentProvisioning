@@ -996,8 +996,8 @@
     which "*"
 
 "@dependency/deploymentScript@https://github.com/AppScriptIO/deploymentScript#semver:^1.x.x":
-  version "1.2.14"
-  resolved "https://github.com/AppScriptIO/deploymentScript#23b02e75ad7560f1b91795652cedd707b40965c0"
+  version "1.2.16"
+  resolved "https://github.com/AppScriptIO/deploymentScript#ff0abc566c5d97b83223ae8f9fb34358262dedd3"
   dependencies:
     "@dependency/buildTool" "https://github.com/AppScriptIO/buildTool#semver:^1.x.x"
     "@dependency/deploymentProvisioning" "https://github.com/AppScriptIO/deploymentProvisioning#semver:^1.x.x"
