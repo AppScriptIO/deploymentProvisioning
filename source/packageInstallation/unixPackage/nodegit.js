@@ -56,6 +56,7 @@ module.exports = {
           `echo 'Machine global peer dependency "nodegit" is required. Checking for libgit2...\n'`,
           // `-qq` = No output except for errors
           `DEBIAN_FRONTEND=noninteractive sudo apt-get install -yqq ${libgit2PackageVersion} openssl`,
+          `sudo yarn global add node-pre-gyp`, // fixes errors during nodegit installations, although node-pre-gyp already exists from linux apt package manager.
         ].join(' && \\\n'),
         childProcessOption,
       )
