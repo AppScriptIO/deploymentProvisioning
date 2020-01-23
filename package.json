@@ -1,12 +1,12 @@
 {
-	"name": "@dependency/deploymentProvisioning",
-	"version": "1.0.11",
+	"name": "@deployment/deploymentProvisioning",
+	"version": "2.0.1",
 	"main": "./entrypoint/programmaticAPI",
 	"scripts": {
-		"exportGraphData": "yarn run scriptManager shouldCompileScript=true @dependency/deploymentScript \".graphDataLoading.exportAllGraphData({targetPath: './temporary/resource',fileName: 'graphData.json'})\"",
-		"loadGraphData": "yarn run scriptManager shouldCompileScript=true @dependency/deploymentScript \".graphDataLoading.loadGraphDataFromFile({ shouldClearDatabase: true, graphDataFilePath: './resource/graphData.json' })\"",
-		"build": "yarn run scriptManager shouldCompileScript=true @dependency/deploymentScript \".buildSourceCode.moduleProject({}, {compile:[/**'./test'*/]})\"",
-		"buildAndRelease": "yarn run scriptManager shouldCompileScript=true @dependency/deploymentScript \".buildAndRelease.moduleProject({})\"",
+		"exportGraphData": "yarn run scriptManager shouldCompileScript=true @deployment/deploymentScript \".graphDataLoading.exportAllGraphData({targetPath: './temporary/resource',fileName: 'graphData.json'})\"",
+		"loadGraphData": "yarn run scriptManager shouldCompileScript=true @deployment/deploymentScript \".graphDataLoading.loadGraphDataFromFile({ shouldClearDatabase: true, graphDataFilePath: './resource/graphData.json' })\"",
+		"build": "yarn run scriptManager shouldCompileScript=true @deployment/deploymentScript \".buildSourceCode.moduleProject({}, {compile:[/**'./test'*/]})\"",
+		"buildAndRelease": "yarn run scriptManager shouldCompileScript=true @deployment/deploymentScript \".buildAndRelease.moduleProject({})\"",
 		"runNeo4jContainer": "yarn run scriptManager shouldCompileScript=true ./source/dockerContainer/neo4jContainer.js \".runDockerContainer()\""
 	},
 	"dependencies": {
@@ -22,9 +22,9 @@
 		"which": "*"
 	},
 	"devDependencies": {
-		"@dependency/deploymentScript": "https://github.com/AppScriptIO/deploymentScript#semver:^2.x.x",
-		"@dependency/javascriptStaticAnalysis": "https://github.com/AppScriptIO/javascriptStaticAnalysis#semver:^1.x.x",
-		"@dependency/scriptManager": "https://github.com/AppScriptIO/scriptManager#semver:^1.x.x",
+		"@deployment/deploymentScript": "https://github.com/AppScriptIO/deploymentScript#semver:^2.x.x",
+		"@deployment/javascriptStaticAnalysis": "https://github.com/AppScriptIO/javascriptStaticAnalysis#semver:^2.x.x",
+		"@deployment/scriptManager": "https://github.com/AppScriptIO/scriptManager#semver:^2.x.x",
 		"typescript": "*"
 	}
 }
