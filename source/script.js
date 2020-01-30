@@ -1,14 +1,2 @@
-export * as permission from './terminal/permission.js'
-export * as shellInput from './terminal/shellInput.js'
-
-export * as jshint from './packageInstallation/nodejsPackage/jshint.js'
-export * as installUsingPackageManager from './packageInstallation/nodejsPackage/installUsingPackageManager.js'
-
-export * as docker from './packageInstallation/unixPackage/docker.js'
-export * as git from './packageInstallation/unixPackage/git.js'
-export * as jspm from './packageInstallation/unixPackage/jspm.js'
-export * as zshShell from './packageInstallation/unixPackage/zshShell.js'
-export * as yarn from './packageInstallation/unixPackage/yarn.js'
-export * as nodegit from './packageInstallation/unixPackage/nodegit.js'
-export * as nodeVersionManagement from './packageInstallation/unixPackage/nodeVersionManagement.js'
-export * as updateLinux from './packageInstallation/unixPackage/updateLinux.js'
+"use strict";var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");Object.defineProperty(exports, "__esModule", { value: true });exports.updateLinux = exports.nodeVersionManagement = exports.nodegit = exports.yarn = exports.zshShell = exports.jspm = exports.git = exports.docker = exports.installUsingPackageManager = exports.jshint = exports.shellInput = exports.permission = void 0;var _permission = _interopRequireWildcard(require("./terminal/permission.js"));exports.permission = _permission;var _shellInput = _interopRequireWildcard(require("./terminal/shellInput.js"));exports.shellInput = _shellInput;var _jshint = _interopRequireWildcard(require("./packageInstallation/nodejsPackage/jshint.js"));exports.jshint = _jshint;var _installUsingPackageManager = _interopRequireWildcard(require("./packageInstallation/nodejsPackage/installUsingPackageManager.js"));exports.installUsingPackageManager = _installUsingPackageManager;var _docker = _interopRequireWildcard(require("./packageInstallation/unixPackage/docker.js"));exports.docker = _docker;var _git = _interopRequireWildcard(require("./packageInstallation/unixPackage/git.js"));exports.git = _git;var _jspm = _interopRequireWildcard(require("./packageInstallation/unixPackage/jspm.js"));exports.jspm = _jspm;var _zshShell = _interopRequireWildcard(require("./packageInstallation/unixPackage/zshShell.js"));exports.zshShell = _zshShell;var _yarn = _interopRequireWildcard(require("./packageInstallation/unixPackage/yarn.js"));exports.yarn = _yarn;var _nodegit = _interopRequireWildcard(require("./packageInstallation/unixPackage/nodegit.js"));exports.nodegit = _nodegit;var _nodeVersionManagement = _interopRequireWildcard(require("./packageInstallation/unixPackage/nodeVersionManagement.js"));exports.nodeVersionManagement = _nodeVersionManagement;var _updateLinux = _interopRequireWildcard(require("./packageInstallation/unixPackage/updateLinux.js"));exports.updateLinux = _updateLinux;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsInNvdXJjZXNDb250ZW50IjpbXX0=
