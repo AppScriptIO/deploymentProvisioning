@@ -39,8 +39,8 @@ Important conclusions:
   - NodeGit depends on LibGit2 version.
   - LibGit2 depends on linux ditribution.
 */
-module.exports = {
-  install: function install() {
+export function install({ shouldThrow = true } = {}) {
+  try {
     let libgit2PackageVersion = `libgit2-27` // Importatnt! When upgrade the version make sure the nodejs packge `nodegit` which depends on `libgit2` supports the version.
     // for Ubuntu 19+ or Debian 10+ (i.e. package `libgit2-27` must exist)
     let packagesInstalled = childProcess
@@ -60,5 +60,8 @@ module.exports = {
         ].join(' && \\\n'),
         childProcessOption,
       )
-  },
+  } catch (error) {
+    if (shouldThrow) throw error
+    else console.log(error)
+  }
 }
