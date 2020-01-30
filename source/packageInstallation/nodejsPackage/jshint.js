@@ -1,9 +1,10 @@
-const childProcess = require('child_process')
-const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] }
-const { sync: binaryExist } = require('command-exists')
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.install = install;const childProcess = require('child_process');
+const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] };
+const { sync: binaryExist } = require('command-exists');
 
-// Installed globally for usage with VSCode extension
-export function install() {
-  if (binaryExist('jshint')) console.log('✔ jshint (npm package) is installed.')
-  else childProcess.execSync('yarn install -g jshint', childProcessOption)
+
+function install() {
+  if (binaryExist('jshint')) console.log('✔ jshint (npm package) is installed.');else
+  childProcess.execSync('yarn install -g jshint', childProcessOption);
 }
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NvdXJjZS9wYWNrYWdlSW5zdGFsbGF0aW9uL25vZGVqc1BhY2thZ2UvanNoaW50LmpzIl0sIm5hbWVzIjpbImNoaWxkUHJvY2VzcyIsInJlcXVpcmUiLCJjaGlsZFByb2Nlc3NPcHRpb24iLCJjd2QiLCJfX2Rpcm5hbWUiLCJzaGVsbCIsInN0ZGlvIiwic3luYyIsImJpbmFyeUV4aXN0IiwiaW5zdGFsbCIsImNvbnNvbGUiLCJsb2ciLCJleGVjU3luYyJdLCJtYXBwaW5ncyI6InFHQUFBLE1BQU1BLFlBQVksR0FBR0MsT0FBTyxDQUFDLGVBQUQsQ0FBNUI7QUFDQSxNQUFNQyxrQkFBa0IsR0FBRyxFQUFFQyxHQUFHLEVBQUVDLFNBQVAsRUFBa0JDLEtBQUssRUFBRSxJQUF6QixFQUErQkMsS0FBSyxFQUFFLENBQUMsQ0FBRCxFQUFJLENBQUosRUFBTyxDQUFQLENBQXRDLEVBQTNCO0FBQ0EsTUFBTSxFQUFFQyxJQUFJLEVBQUVDLFdBQVIsS0FBd0JQLE9BQU8sQ0FBQyxnQkFBRCxDQUFyQzs7O0FBR08sU0FBU1EsT0FBVCxHQUFtQjtBQUN4QixNQUFJRCxXQUFXLENBQUMsUUFBRCxDQUFmLEVBQTJCRSxPQUFPLENBQUNDLEdBQVIsQ0FBWSxzQ0FBWixFQUEzQjtBQUNLWCxFQUFBQSxZQUFZLENBQUNZLFFBQWIsQ0FBc0Isd0JBQXRCLEVBQWdEVixrQkFBaEQ7QUFDTiIsInNvdXJjZXNDb250ZW50IjpbImNvbnN0IGNoaWxkUHJvY2VzcyA9IHJlcXVpcmUoJ2NoaWxkX3Byb2Nlc3MnKVxyXG5jb25zdCBjaGlsZFByb2Nlc3NPcHRpb24gPSB7IGN3ZDogX19kaXJuYW1lLCBzaGVsbDogdHJ1ZSwgc3RkaW86IFswLCAxLCAyXSB9XHJcbmNvbnN0IHsgc3luYzogYmluYXJ5RXhpc3QgfSA9IHJlcXVpcmUoJ2NvbW1hbmQtZXhpc3RzJylcclxuXHJcbi8vIEluc3RhbGxlZCBnbG9iYWxseSBmb3IgdXNhZ2Ugd2l0aCBWU0NvZGUgZXh0ZW5zaW9uXHJcbmV4cG9ydCBmdW5jdGlvbiBpbnN0YWxsKCkge1xyXG4gIGlmIChiaW5hcnlFeGlzdCgnanNoaW50JykpIGNvbnNvbGUubG9nKCfinJQganNoaW50IChucG0gcGFja2FnZSkgaXMgaW5zdGFsbGVkLicpXHJcbiAgZWxzZSBjaGlsZFByb2Nlc3MuZXhlY1N5bmMoJ3lhcm4gaW5zdGFsbCAtZyBqc2hpbnQnLCBjaGlsZFByb2Nlc3NPcHRpb24pXHJcbn1cclxuIl19

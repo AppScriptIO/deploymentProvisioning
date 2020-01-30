@@ -1,24 +1,25 @@
-const childProcess = require('child_process')
-const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] }
-const assert = require('assert')
-const operatingSystem = require('os')
-const { sync: binaryExist } = require('command-exists')
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.install = install;const childProcess = require('child_process');
+const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] };
+const assert = require('assert');
+const operatingSystem = require('os');
+const { sync: binaryExist } = require('command-exists');
 
-export function install({ shouldThrow = true }) {
-  if (binaryExist('rsync')) return console.log('✔ rsync executable is installed.')
+function install({ shouldThrow = true }) {
+  if (binaryExist('rsync')) return console.log('✔ rsync executable is installed.');
 
   try {
     assert(
-      operatingSystem
-        .platform()
-        .toLowerCase()
-        .includes('linux'),
-      `• This script must be run in WSL (wsl.exe), not Windows OS.`,
-    )
+    operatingSystem.
+    platform().
+    toLowerCase().
+    includes('linux'),
+    `• This script must be run in WSL (wsl.exe), not Windows OS.`);
 
-    childProcess.execSync(`apt-get install rsync`, childProcessOption)
+
+    childProcess.execSync(`apt-get install rsync`, childProcessOption);
   } catch (error) {
-    if (shouldThrow) throw error
-    else console.log(error)
+    if (shouldThrow) throw error;else
+    console.log(error);
   }
 }
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NvdXJjZS9wYWNrYWdlSW5zdGFsbGF0aW9uL3VuaXhQYWNrYWdlL3JzeW5jLmpzIl0sIm5hbWVzIjpbImNoaWxkUHJvY2VzcyIsInJlcXVpcmUiLCJjaGlsZFByb2Nlc3NPcHRpb24iLCJjd2QiLCJfX2Rpcm5hbWUiLCJzaGVsbCIsInN0ZGlvIiwiYXNzZXJ0Iiwib3BlcmF0aW5nU3lzdGVtIiwic3luYyIsImJpbmFyeUV4aXN0IiwiaW5zdGFsbCIsInNob3VsZFRocm93IiwiY29uc29sZSIsImxvZyIsInBsYXRmb3JtIiwidG9Mb3dlckNhc2UiLCJpbmNsdWRlcyIsImV4ZWNTeW5jIiwiZXJyb3IiXSwibWFwcGluZ3MiOiJxR0FBQSxNQUFNQSxZQUFZLEdBQUdDLE9BQU8sQ0FBQyxlQUFELENBQTVCO0FBQ0EsTUFBTUMsa0JBQWtCLEdBQUcsRUFBRUMsR0FBRyxFQUFFQyxTQUFQLEVBQWtCQyxLQUFLLEVBQUUsSUFBekIsRUFBK0JDLEtBQUssRUFBRSxDQUFDLENBQUQsRUFBSSxDQUFKLEVBQU8sQ0FBUCxDQUF0QyxFQUEzQjtBQUNBLE1BQU1DLE1BQU0sR0FBR04sT0FBTyxDQUFDLFFBQUQsQ0FBdEI7QUFDQSxNQUFNTyxlQUFlLEdBQUdQLE9BQU8sQ0FBQyxJQUFELENBQS9CO0FBQ0EsTUFBTSxFQUFFUSxJQUFJLEVBQUVDLFdBQVIsS0FBd0JULE9BQU8sQ0FBQyxnQkFBRCxDQUFyQzs7QUFFTyxTQUFTVSxPQUFULENBQWlCLEVBQUVDLFdBQVcsR0FBRyxJQUFoQixFQUFqQixFQUF5QztBQUM5QyxNQUFJRixXQUFXLENBQUMsT0FBRCxDQUFmLEVBQTBCLE9BQU9HLE9BQU8sQ0FBQ0MsR0FBUixDQUFZLGtDQUFaLENBQVA7O0FBRTFCLE1BQUk7QUFDRlAsSUFBQUEsTUFBTTtBQUNKQyxJQUFBQSxlQUFlO0FBQ1pPLElBQUFBLFFBREg7QUFFR0MsSUFBQUEsV0FGSDtBQUdHQyxJQUFBQSxRQUhILENBR1ksT0FIWixDQURJO0FBS0gsaUVBTEcsQ0FBTjs7O0FBUUFqQixJQUFBQSxZQUFZLENBQUNrQixRQUFiLENBQXVCLHVCQUF2QixFQUErQ2hCLGtCQUEvQztBQUNELEdBVkQsQ0FVRSxPQUFPaUIsS0FBUCxFQUFjO0FBQ2QsUUFBSVAsV0FBSixFQUFpQixNQUFNTyxLQUFOLENBQWpCO0FBQ0tOLElBQUFBLE9BQU8sQ0FBQ0MsR0FBUixDQUFZSyxLQUFaO0FBQ047QUFDRiIsInNvdXJjZXNDb250ZW50IjpbImNvbnN0IGNoaWxkUHJvY2VzcyA9IHJlcXVpcmUoJ2NoaWxkX3Byb2Nlc3MnKVxyXG5jb25zdCBjaGlsZFByb2Nlc3NPcHRpb24gPSB7IGN3ZDogX19kaXJuYW1lLCBzaGVsbDogdHJ1ZSwgc3RkaW86IFswLCAxLCAyXSB9XHJcbmNvbnN0IGFzc2VydCA9IHJlcXVpcmUoJ2Fzc2VydCcpXHJcbmNvbnN0IG9wZXJhdGluZ1N5c3RlbSA9IHJlcXVpcmUoJ29zJylcclxuY29uc3QgeyBzeW5jOiBiaW5hcnlFeGlzdCB9ID0gcmVxdWlyZSgnY29tbWFuZC1leGlzdHMnKVxyXG5cclxuZXhwb3J0IGZ1bmN0aW9uIGluc3RhbGwoeyBzaG91bGRUaHJvdyA9IHRydWUgfSkge1xyXG4gIGlmIChiaW5hcnlFeGlzdCgncnN5bmMnKSkgcmV0dXJuIGNvbnNvbGUubG9nKCfinJQgcnN5bmMgZXhlY3V0YWJsZSBpcyBpbnN0YWxsZWQuJylcclxuXHJcbiAgdHJ5IHtcclxuICAgIGFzc2VydChcclxuICAgICAgb3BlcmF0aW5nU3lzdGVtXHJcbiAgICAgICAgLnBsYXRmb3JtKClcclxuICAgICAgICAudG9Mb3dlckNhc2UoKVxyXG4gICAgICAgIC5pbmNsdWRlcygnbGludXgnKSxcclxuICAgICAgYOKAoiBUaGlzIHNjcmlwdCBtdXN0IGJlIHJ1biBpbiBXU0wgKHdzbC5leGUpLCBub3QgV2luZG93cyBPUy5gLFxyXG4gICAgKVxyXG5cclxuICAgIGNoaWxkUHJvY2Vzcy5leGVjU3luYyhgYXB0LWdldCBpbnN0YWxsIHJzeW5jYCwgY2hpbGRQcm9jZXNzT3B0aW9uKVxyXG4gIH0gY2F0Y2ggKGVycm9yKSB7XHJcbiAgICBpZiAoc2hvdWxkVGhyb3cpIHRocm93IGVycm9yXHJcbiAgICBlbHNlIGNvbnNvbGUubG9nKGVycm9yKVxyXG4gIH1cclxufVxyXG4iXX0=
