@@ -1,6 +1,6 @@
 {
 	"name": "@deployment/deploymentProvisioning",
-	"version": "2.0.1",
+	"version": "2.1.0",
 	"main": "./entrypoint/programmaticAPI",
 	"scripts": {
 		"exportGraphData": "yarn run scriptManager shouldCompileScript=true @deployment/deploymentScript \".graphDataLoading.exportAllGraphData({targetPath: './temporary/resource',fileName: 'graphData.json'})\"",
@@ -10,15 +10,9 @@
 		"runNeo4jContainer": "yarn run scriptManager shouldCompileScript=true ./source/dockerContainer/neo4jContainer.js \".runDockerContainer()\""
 	},
 	"dependencies": {
-		"any-promise": "*",
 		"command-exists": "*",
-		"gulp-plumber": "*",
-		"gulp-size": "*",
 		"is-wsl": "*",
-		"mkdirp": "*",
-		"rsync": "*",
 		"shelljs": "*",
-		"vinyl-fs": "*",
 		"which": "*"
 	},
 	"devDependencies": {
