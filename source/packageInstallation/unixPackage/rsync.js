@@ -4,16 +4,21 @@ const assert = require('assert')
 const operatingSystem = require('os')
 const { sync: binaryExist } = require('command-exists')
 
-export function install() {
+export function install({ shouldThrow = true }) {
   if (binaryExist('rsync')) return console.log('✔ rsync executable is installed.')
 
-  assert(
-    operatingSystem
-      .platform()
-      .toLowerCase()
-      .includes('linux'),
-    `• This script must be run in WSL (wsl.exe), not Windows OS.`,
-  )
+  try {
+    assert(
+      operatingSystem
+        .platform()
+        .toLowerCase()
+        .includes('linux'),
+      `• This script must be run in WSL (wsl.exe), not Windows OS.`,
+    )
 
-  childProcess.execSync(`apt-get install rsync`, childProcessOption)
+    childProcess.execSync(`apt-get install rsync`, childProcessOption)
+  } catch (error) {
+    if (shouldThrow) throw error
+    else console.log(error)
+  }
 }
