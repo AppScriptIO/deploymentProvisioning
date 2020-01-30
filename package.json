@@ -1,6 +1,6 @@
 {
 	"name": "@deployment/deploymentProvisioning",
-	"version": "2.1.0",
+	"version": "2.1.1",
 	"main": "./entrypoint/programmaticAPI",
 	"scripts": {
 		"exportGraphData": "yarn run scriptManager shouldCompileScript=true @deployment/deploymentScript \".graphDataLoading.exportAllGraphData({targetPath: './temporary/resource',fileName: 'graphData.json'})\"",
