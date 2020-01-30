@@ -16,7 +16,7 @@ export function install({ shouldThrow = true } = {}) {
       `• This script must be run in WSL (wsl.exe), not Windows OS.`,
     )
 
-    childProcess.execSync(`apt-get install rsync`, childProcessOption)
+    childProcess.execSync(`sudo apt-get install rsync`, childProcessOption)
   } catch (error) {
     if (shouldThrow) throw error
     else console.log(error)
