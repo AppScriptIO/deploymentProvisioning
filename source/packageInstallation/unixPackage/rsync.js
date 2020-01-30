@@ -1,19 +1,20 @@
-const childProcess = require('child_process')
-const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] }
-const assert = require('assert')
-const operatingSystem = require('os')
-const { sync: binaryExist } = require('command-exists')
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.install = install;const childProcess = require('child_process');
+const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] };
+const assert = require('assert');
+const operatingSystem = require('os');
+const { sync: binaryExist } = require('command-exists');
 
-export function install() {
-  if (binaryExist('rsync')) return console.log('✔ rsync executable is installed.')
+function install() {
+  if (binaryExist('rsync')) return console.log('✔ rsync executable is installed.');
 
   assert(
-    operatingSystem
-      .platform()
-      .toLowerCase()
-      .includes('linux'),
-    `• This script must be run in WSL (wsl.exe), not Windows OS.`,
-  )
+  operatingSystem.
+  platform().
+  toLowerCase().
+  includes('linux'),
+  `• This script must be run in WSL (wsl.exe), not Windows OS.`);
 
-  childProcess.execSync(`apt-get install rsync`, childProcessOption)
+
+  childProcess.execSync(`apt-get install rsync`, childProcessOption);
 }
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NvdXJjZS9wYWNrYWdlSW5zdGFsbGF0aW9uL3VuaXhQYWNrYWdlL3JzeW5jLmpzIl0sIm5hbWVzIjpbImNoaWxkUHJvY2VzcyIsInJlcXVpcmUiLCJjaGlsZFByb2Nlc3NPcHRpb24iLCJjd2QiLCJfX2Rpcm5hbWUiLCJzaGVsbCIsInN0ZGlvIiwiYXNzZXJ0Iiwib3BlcmF0aW5nU3lzdGVtIiwic3luYyIsImJpbmFyeUV4aXN0IiwiaW5zdGFsbCIsImNvbnNvbGUiLCJsb2ciLCJwbGF0Zm9ybSIsInRvTG93ZXJDYXNlIiwiaW5jbHVkZXMiLCJleGVjU3luYyJdLCJtYXBwaW5ncyI6InFHQUFBLE1BQU1BLFlBQVksR0FBR0MsT0FBTyxDQUFDLGVBQUQsQ0FBNUI7QUFDQSxNQUFNQyxrQkFBa0IsR0FBRyxFQUFFQyxHQUFHLEVBQUVDLFNBQVAsRUFBa0JDLEtBQUssRUFBRSxJQUF6QixFQUErQkMsS0FBSyxFQUFFLENBQUMsQ0FBRCxFQUFJLENBQUosRUFBTyxDQUFQLENBQXRDLEVBQTNCO0FBQ0EsTUFBTUMsTUFBTSxHQUFHTixPQUFPLENBQUMsUUFBRCxDQUF0QjtBQUNBLE1BQU1PLGVBQWUsR0FBR1AsT0FBTyxDQUFDLElBQUQsQ0FBL0I7QUFDQSxNQUFNLEVBQUVRLElBQUksRUFBRUMsV0FBUixLQUF3QlQsT0FBTyxDQUFDLGdCQUFELENBQXJDOztBQUVPLFNBQVNVLE9BQVQsR0FBbUI7QUFDeEIsTUFBSUQsV0FBVyxDQUFDLE9BQUQsQ0FBZixFQUEwQixPQUFPRSxPQUFPLENBQUNDLEdBQVIsQ0FBWSxrQ0FBWixDQUFQOztBQUUxQk4sRUFBQUEsTUFBTTtBQUNKQyxFQUFBQSxlQUFlO0FBQ1pNLEVBQUFBLFFBREg7QUFFR0MsRUFBQUEsV0FGSDtBQUdHQyxFQUFBQSxRQUhILENBR1ksT0FIWixDQURJO0FBS0gsK0RBTEcsQ0FBTjs7O0FBUUFoQixFQUFBQSxZQUFZLENBQUNpQixRQUFiLENBQXVCLHVCQUF2QixFQUErQ2Ysa0JBQS9DO0FBQ0QiLCJzb3VyY2VzQ29udGVudCI6WyJjb25zdCBjaGlsZFByb2Nlc3MgPSByZXF1aXJlKCdjaGlsZF9wcm9jZXNzJylcclxuY29uc3QgY2hpbGRQcm9jZXNzT3B0aW9uID0geyBjd2Q6IF9fZGlybmFtZSwgc2hlbGw6IHRydWUsIHN0ZGlvOiBbMCwgMSwgMl0gfVxyXG5jb25zdCBhc3NlcnQgPSByZXF1aXJlKCdhc3NlcnQnKVxyXG5jb25zdCBvcGVyYXRpbmdTeXN0ZW0gPSByZXF1aXJlKCdvcycpXHJcbmNvbnN0IHsgc3luYzogYmluYXJ5RXhpc3QgfSA9IHJlcXVpcmUoJ2NvbW1hbmQtZXhpc3RzJylcclxuXHJcbmV4cG9ydCBmdW5jdGlvbiBpbnN0YWxsKCkge1xyXG4gIGlmIChiaW5hcnlFeGlzdCgncnN5bmMnKSkgcmV0dXJuIGNvbnNvbGUubG9nKCfinJQgcnN5bmMgZXhlY3V0YWJsZSBpcyBpbnN0YWxsZWQuJylcclxuXHJcbiAgYXNzZXJ0KFxyXG4gICAgb3BlcmF0aW5nU3lzdGVtXHJcbiAgICAgIC5wbGF0Zm9ybSgpXHJcbiAgICAgIC50b0xvd2VyQ2FzZSgpXHJcbiAgICAgIC5pbmNsdWRlcygnbGludXgnKSxcclxuICAgIGDigKIgVGhpcyBzY3JpcHQgbXVzdCBiZSBydW4gaW4gV1NMICh3c2wuZXhlKSwgbm90IFdpbmRvd3MgT1MuYCxcclxuICApXHJcblxyXG4gIGNoaWxkUHJvY2Vzcy5leGVjU3luYyhgYXB0LWdldCBpbnN0YWxsIHJzeW5jYCwgY2hpbGRQcm9jZXNzT3B0aW9uKVxyXG59XHJcbiJdfQ==

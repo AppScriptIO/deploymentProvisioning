@@ -1,8 +1,9 @@
-const childProcess = require('child_process')
-const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] }
-const { sync: binaryExist } = require('command-exists')
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.install = install;const childProcess = require('child_process');
+const childProcessOption = { cwd: __dirname, shell: true, stdio: [0, 1, 2] };
+const { sync: binaryExist } = require('command-exists');
 
-export function install() {
-  if (binaryExist('git')) console.log('✔ git is installed.')
-  else childProcess.execSync('sudo apt install git', childProcessOption)
+function install() {
+  if (binaryExist('git')) console.log('✔ git is installed.');else
+  childProcess.execSync('sudo apt install git', childProcessOption);
 }
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NvdXJjZS9wYWNrYWdlSW5zdGFsbGF0aW9uL3VuaXhQYWNrYWdlL2dpdC5qcyJdLCJuYW1lcyI6WyJjaGlsZFByb2Nlc3MiLCJyZXF1aXJlIiwiY2hpbGRQcm9jZXNzT3B0aW9uIiwiY3dkIiwiX19kaXJuYW1lIiwic2hlbGwiLCJzdGRpbyIsInN5bmMiLCJiaW5hcnlFeGlzdCIsImluc3RhbGwiLCJjb25zb2xlIiwibG9nIiwiZXhlY1N5bmMiXSwibWFwcGluZ3MiOiJxR0FBQSxNQUFNQSxZQUFZLEdBQUdDLE9BQU8sQ0FBQyxlQUFELENBQTVCO0FBQ0EsTUFBTUMsa0JBQWtCLEdBQUcsRUFBRUMsR0FBRyxFQUFFQyxTQUFQLEVBQWtCQyxLQUFLLEVBQUUsSUFBekIsRUFBK0JDLEtBQUssRUFBRSxDQUFDLENBQUQsRUFBSSxDQUFKLEVBQU8sQ0FBUCxDQUF0QyxFQUEzQjtBQUNBLE1BQU0sRUFBRUMsSUFBSSxFQUFFQyxXQUFSLEtBQXdCUCxPQUFPLENBQUMsZ0JBQUQsQ0FBckM7O0FBRU8sU0FBU1EsT0FBVCxHQUFtQjtBQUN4QixNQUFJRCxXQUFXLENBQUMsS0FBRCxDQUFmLEVBQXdCRSxPQUFPLENBQUNDLEdBQVIsQ0FBWSxxQkFBWixFQUF4QjtBQUNLWCxFQUFBQSxZQUFZLENBQUNZLFFBQWIsQ0FBc0Isc0JBQXRCLEVBQThDVixrQkFBOUM7QUFDTiIsInNvdXJjZXNDb250ZW50IjpbImNvbnN0IGNoaWxkUHJvY2VzcyA9IHJlcXVpcmUoJ2NoaWxkX3Byb2Nlc3MnKVxyXG5jb25zdCBjaGlsZFByb2Nlc3NPcHRpb24gPSB7IGN3ZDogX19kaXJuYW1lLCBzaGVsbDogdHJ1ZSwgc3RkaW86IFswLCAxLCAyXSB9XHJcbmNvbnN0IHsgc3luYzogYmluYXJ5RXhpc3QgfSA9IHJlcXVpcmUoJ2NvbW1hbmQtZXhpc3RzJylcclxuXHJcbmV4cG9ydCBmdW5jdGlvbiBpbnN0YWxsKCkge1xyXG4gIGlmIChiaW5hcnlFeGlzdCgnZ2l0JykpIGNvbnNvbGUubG9nKCfinJQgZ2l0IGlzIGluc3RhbGxlZC4nKVxyXG4gIGVsc2UgY2hpbGRQcm9jZXNzLmV4ZWNTeW5jKCdzdWRvIGFwdCBpbnN0YWxsIGdpdCcsIGNoaWxkUHJvY2Vzc09wdGlvbilcclxufVxyXG4iXX0=
