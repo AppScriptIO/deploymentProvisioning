@@ -4,7 +4,7 @@ const assert = require('assert')
 const operatingSystem = require('os')
 const { sync: binaryExist } = require('command-exists')
 
-export function install({ shouldThrow = true }) {
+export function install({ shouldThrow = true } = {}) {
   if (binaryExist('rsync')) return console.log('✔ rsync executable is installed.')
 
   try {
