@@ -6,8 +6,7 @@
 		"exportGraphData": "yarn run scriptManager shouldCompileScript=true @deployment/deploymentScript \".graphDataLoading.exportAllGraphData({targetPath: './temporary/resource',fileName: 'graphData.json'})\"",
 		"loadGraphData": "yarn run scriptManager shouldCompileScript=true @deployment/deploymentScript \".graphDataLoading.loadGraphDataFromFile({ shouldClearDatabase: true, graphDataFilePath: './resource/graphData.json' })\"",
 		"build": "yarn run scriptManager shouldCompileScript=true @deployment/deploymentScript \".buildSourceCode.moduleProject({}, {compile:[/**'./test'*/]})\"",
-		"buildAndRelease": "yarn run scriptManager shouldCompileScript=true @deployment/deploymentScript \".buildAndRelease.moduleProject({})\"",
-		"runNeo4jContainer": "yarn run scriptManager shouldCompileScript=true ./source/dockerContainer/neo4jContainer.js \".runDockerContainer()\""
+		"buildAndRelease": "yarn run scriptManager shouldCompileScript=true @deployment/deploymentScript \".buildAndRelease.moduleProject({})\""
 	},
 	"dependencies": {
 		"command-exists": "*",
