@@ -17,8 +17,10 @@ export function install({ assignDockerHost = true } = {}) {
       `curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -`,
       `sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable nightly"`,
       `sudo apt-get update -y`,
-      `sudo apt-get install -y docker-ce docker-ce-cli containerd.io`,
+      `sudo apt-get install -y docker-ce docker-ce-cli`,
       `sudo usermod -aG docker $USER`,
+      // Additional standard container runtime - https://medium.com/@alenkacz/whats-the-difference-between-runc-containerd-docker-3fc8f79d4d6e
+      // `sudo apt-get install -y containerd.io`,
     ]
 
     // In case of WSL2 & native docker engine, no DOCKER_HOST should be assigned - Allow access from/to WSL2 docker engine https://github.com/microsoft/WSL/issues/4321
