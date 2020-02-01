@@ -8,21 +8,25 @@ const { sync: binaryExist } = require('command-exists')
   docker ps 
   ```
 */
-export function install() {
+export function install({ assignDockerHost = true } = {}) {
   if (binaryExist('docker')) console.log('✔ docker is installed.')
-  else
-    childProcess.execSync(
-      [
-        `sudo apt-get update -y && sudo apt-get upgrade -y`,
-        `sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common`,
-        `curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -`,
-        `sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable nightly"`,
-        `sudo apt-get update -y`,
-        `sudo apt-get install -y docker-ce docker-ce-cli containerd.io`,
-        `sudo usermod -aG docker $USER`,
-        // If this variable doesn't persist between PC reboots, then add `export DOCKER_HOST=tcp://127.0.0.1:2375` to .bashrc or the current shell config file, so it will run each time shell is initialized.
-        `export DOCKER_HOST=tcp://127.0.0.1:2375`,
-      ].join(' && \\\n'),
-      childProcessOption,
-    )
+  else {
+    let commandExecutable = [
+      `sudo apt-get update -y && sudo apt-get upgrade -y`,
+      `sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common`,
+      `curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -`,
+      `sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable nightly"`,
+      `sudo apt-get update -y`,
+      `sudo apt-get install -y docker-ce docker-ce-cli containerd.io`,
+      `sudo usermod -aG docker $USER`,
+    ]
+
+    // In case of WSL2 & native docker engine, no DOCKER_HOST should be assigned - Allow access from/to WSL2 docker engine https://github.com/microsoft/WSL/issues/4321
+    if (assignDockerHost) {
+      // If this variable doesn't persist between PC reboots, then add `export DOCKER_HOST=tcp://127.0.0.1:2375` to .bashrc or the current shell config file, so it will run each time shell is initialized.
+      commandExecutable.push(`export DOCKER_HOST=tcp://127.0.0.1:2375`)
+    }
+
+    childProcess.execSync(commandExecutable.join(' && \\\n'), childProcessOption)
+  }
 }
