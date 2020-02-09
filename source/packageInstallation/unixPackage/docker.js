@@ -32,3 +32,6 @@ export function install({ assignDockerHost = true } = {}) {
     childProcess.execSync(commandExecutable.join(' && \\\n'), childProcessOption)
   }
 }
+
+// download the latest version of Docker Compose
+// 'curl -L https://github.com/docker/compose/releases/download/'+ dockerComposeVersion +'/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose''
